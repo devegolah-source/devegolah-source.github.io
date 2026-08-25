@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Politique de confidentialité — FinanceHub</title>
+<meta name="description" content="Politique de confidentialité de l'application FinanceHub : vos données financières restent sur votre appareil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+  :root {
+    --ground: #FAFAFC;
+    --surface: #FFFFFF;
+    --surface-2: #F2F2F7;
+    --ink: #15172A;
+    --muted: #565B78;
+    --faint: #8A8FA8;
+    --line: #E2E2EE;
+    --line-strong: #C9C9DC;
+    --accent: #4F46E5;
+    --accent-soft: #EEEDFD;
+    --warn-soft: #FDF3E2;
+    --warn-line: #E9C88A;
+    --warn-ink: #9A5B00;
+    --display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    --body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0D0E19; --surface: #161930; --surface-2: #1E2140;
+      --ink: #E9EAF4; --muted: #A0A5C4; --faint: #767C9E;
+      --line: #282C4C; --line-strong: #3A3F66;
+      --accent: #A5B4FC; --accent-soft: #1E2149;
+      --warn-soft: #2A2214; --warn-line: #5C4A24; --warn-ink: #E9B96B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0D0E19; --surface: #161930; --surface-2: #1E2140;
+    --ink: #E9EAF4; --muted: #A0A5C4; --faint: #767C9E;
+    --line: #282C4C; --line-strong: #3A3F66;
+    --accent: #A5B4FC; --accent-soft: #1E2149;
+    --warn-soft: #2A2214; --warn-line: #5C4A24; --warn-ink: #E9B96B;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 760px; margin: 0 auto; padding: 56px 24px 88px; }
+
+  .eyebrow {
+    font-family: var(--display);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint); margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(30px, 5.5vw, 42px);
+    font-weight: 700; letter-spacing: -.025em; line-height: 1.1;
+    text-wrap: balance; margin: 0 0 20px;
+  }
+  h2 {
+    font-family: var(--display);
+    font-size: 24px; font-weight: 600; letter-spacing: -.015em;
+    line-height: 1.25; text-wrap: balance;
+    margin: 48px 0 14px; padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  h3 {
+    font-family: var(--display);
+    font-size: 18px; font-weight: 600;
+    margin: 30px 0 10px;
+  }
+  p, li { max-width: 66ch; }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { font-weight: 600; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  code {
+    font-family: var(--mono); font-size: .85em;
+    background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 4px; padding: 1px 5px; word-break: break-word;
+  }
+
+  .meta {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 0 0 28px;
+    font-size: 15.5px;
+  }
+  .meta dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; }
+  .meta dt {
+    font-family: var(--display); font-size: 11.5px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+    padding-top: 4px; white-space: nowrap;
+  }
+  .meta dd { margin: 0; }
+
+  .todo {
+    background: var(--warn-soft);
+    border: 1px solid var(--warn-line);
+    color: var(--warn-ink);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  .summary {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin: 0 0 8px;
+  }
+  .summary p:last-child { margin-bottom: 0; }
+
+  .tablewrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    margin: 0 0 14px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 15.5px; min-width: 480px; }
+  th {
+    font-family: var(--display); font-size: 11.5px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+    text-align: left; padding: 12px 16px;
+    border-bottom: 1px solid var(--line-strong); white-space: nowrap;
+  }
+  td { padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; }
+  tr:last-child td { border-bottom: 0; }
+
+  footer {
+    margin-top: 52px; padding-top: 22px;
+    border-top: 1px solid var(--line);
+    color: var(--faint); font-size: 14.5px;
+  }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .page { padding: 40px 18px 64px; }
+    .meta dl { grid-template-columns: 1fr; gap: 2px; }
+    .meta dt { padding-top: 10px; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <p class="eyebrow">FinanceHub</p>
+  <h1>Politique de confidentialité</h1>
+
+  <div class="meta">
+    <dl>
+      <dt>Mise à jour</dt><dd>25 août 2026 · version 1.1.0</dd>
+      <dt>Application</dt><dd>FinanceHub — <code>com.egolahdev.financehub</code></dd>
+      <dt>Éditeur</dt><dd><span class="todo">à compléter — nom ou raison sociale, adresse postale, pays</span></dd>
+      <dt>Contact</dt><dd><span class="todo">à compléter — adresse e-mail</span></dd>
+    </dl>
+  </div>
+
+  <div class="summary">
+    <p><strong>En une phrase.</strong> FinanceHub est une application de gestion de finances personnelles qui fonctionne <strong>sur votre appareil</strong>. Vos comptes, vos opérations, vos budgets et vos objectifs ne sont envoyés nulle part, sauf si vous activez vous-même la sauvegarde Google Drive.</p>
+  </div>
+
+  <h2>1. Ce que nous ne faisons pas</h2>
+  <ul>
+    <li>Aucun compte à créer : l'application ne demande ni nom, ni adresse e-mail, ni numéro de téléphone pour fonctionner.</li>
+    <li>Aucun traceur, aucun outil de mesure d'audience.</li>
+    <li><strong>Aucune publicité imposée</strong> : ni bannière, ni écran publicitaire, ni publicité au lancement. La seule publicité de l'application est une vidéo que <strong>vous choisissez</strong> de regarder pour débloquer une fonction payante pendant une journée (section 3.4). Un abonné Premium n'en voit aucune.</li>
+    <li>Aucune revente, aucun partage à des fins commerciales.</li>
+    <li>Aucun serveur nous appartenant ne reçoit vos données financières.</li>
+  </ul>
+
+  <h2>2. Où vivent vos données</h2>
+  <p>Toutes les données que vous saisissez — comptes, opérations, budgets, objectifs, récurrences, dettes, catégories, règles et préférences — sont enregistrées dans le <strong>stockage local de l'application, sur votre appareil</strong>.</p>
+  <p>Elles ne sont pas chiffrées séparément : elles reposent sur le chiffrement du système Android et sur le verrouillage de votre appareil. La sauvegarde automatique d'Android est <strong>désactivée</strong> dans l'application, afin que ces données ne partent pas vers votre compte Google à votre insu.</p>
+  <p>Désinstaller l'application ou effacer ses données <strong>supprime définitivement</strong> l'historique. C'est la raison pour laquelle l'application propose un export manuel (Paramètres → Exporter).</p>
+
+  <h2>3. Connexions réseau de l'application</h2>
+  <p>L'application a besoin de la permission <code>INTERNET</code> pour quatre usages, et seulement ceux-là.</p>
+
+  <h3>3.1 Taux de change — automatique, sans donnée personnelle</h3>
+  <p>Pour convertir des comptes tenus en devises différentes, l'application télécharge une table de taux publique, au plus une fois par jour :</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Fournisseur</th><th>Adresse</th><th>Rôle</th></tr></thead>
+      <tbody>
+        <tr><td>Frankfurter</td><td><code>api.frankfurter.dev</code></td><td>Republie les taux de référence de la Banque centrale européenne</td></tr>
+        <tr><td>exchangerate-api</td><td><code>open.er-api.com</code></td><td>Complète les devises non cotées par la BCE, et sert de repli</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>La requête ne contient <strong>aucune donnée vous concernant</strong> : elle demande la table du jour, rien d'autre. Ni montant, ni solde, ni identifiant n'est transmis. Ces fournisseurs voient, comme tout serveur web, l'adresse IP à l'origine de la requête. La fonction peut être évitée en saisissant les taux à la main dans les Paramètres.</p>
+
+  <h3>3.2 Sauvegarde Google Drive — Premium, facultative, activée par vous</h3>
+  <p>Si — et seulement si — vous activez la sauvegarde cloud depuis les Paramètres :</p>
+  <ul>
+    <li>vous vous connectez à <strong>votre</strong> compte Google, dans une fenêtre Google ; l'application ne voit jamais votre mot de passe ;</li>
+    <li>l'application obtient les autorisations <code>drive.file</code> (uniquement les fichiers et dossiers <strong>qu'elle a créés</strong>, jamais le reste de votre Drive) et <code>email</code> (afficher le compte connecté dans les Paramètres) ;</li>
+    <li>un fichier de sauvegarde contenant vos données financières est déposé <strong>dans votre propre Google Drive</strong>. Il vous appartient, il reste sous votre contrôle, et nous n'y avons aucun accès.</li>
+  </ul>
+  <p>L'autorisation <code>drive.file</code> ne donne accès à aucun autre fichier de votre Drive. Vous pouvez vous déconnecter à tout moment depuis les Paramètres — le jeton d'accès est alors révoqué auprès de Google — et supprimer le fichier de sauvegarde directement depuis Drive.</p>
+  <p>Le traitement de ces données par Google relève de la <a href="https://policies.google.com/privacy">politique de confidentialité de Google</a>.</p>
+
+  <h3>3.3 Abonnement Premium — si vous souscrivez</h3>
+  <p>L'achat est traité par <strong>Google Play</strong> et par <strong>RevenueCat</strong>, notre prestataire de gestion d'abonnements. Aucun moyen de paiement ne transite par l'application ni ne nous est communiqué : la fenêtre de paiement est celle de Google Play.</p>
+  <p>RevenueCat reçoit un identifiant anonyme d'installation, l'identifiant du produit acheté et l'état de l'abonnement, afin de savoir si les fonctions payantes doivent être débloquées. Il ne reçoit <strong>aucune donnée financière saisie dans l'application</strong>. Voir la <a href="https://www.revenuecat.com/privacy">politique de confidentialité de RevenueCat</a>.</p>
+
+  <h3>3.4 Publicité récompensée — facultative, déclenchée par vous</h3>
+  <p>L'offre gratuite propose de débloquer une fonction payante ponctuelle — export Excel, rapports avancés, impression — en regardant une courte vidéo publicitaire. <strong>Rien ne se déclenche sans votre appui</strong> : aucune publicité ne s'affiche d'elle-même, nulle part dans l'application. Un abonné Premium ne voit jamais cette proposition.</p>
+  <p>Les vidéos sont fournies par <strong>Google AdMob</strong>. Lorsque vous en demandez une, AdMob reçoit, pour choisir et mesurer la publicité :</p>
+  <ul>
+    <li>l'<strong>identifiant publicitaire</strong> de votre appareil, un numéro que vous pouvez réinitialiser ou supprimer depuis les paramètres Android (Paramètres → Google → Annonces) ;</li>
+    <li>des informations techniques : modèle d'appareil, système, langue, adresse IP (d'où se déduit une localisation approximative).</li>
+  </ul>
+  <p>AdMob ne reçoit <strong>aucune donnée saisie dans l'application</strong> : ni compte, ni opération, ni solde, ni budget. Aucune de vos données financières ne sert à cibler la publicité.</p>
+  <p><strong>Votre consentement.</strong> Dans l'Espace économique européen, au Royaume-Uni et en Suisse, un formulaire de consentement Google s'affiche avant la première publicité. Vous pouvez accepter, refuser, ou régler chaque finalité en détail. En cas de refus, les publicités restent possibles mais sont <strong>non personnalisées</strong> : elles ne s'appuient alors pas sur un profil publicitaire. Vous pouvez revenir sur ce choix à tout moment depuis <strong>Paramètres → Abonnement → Préférences publicitaires</strong>.</p>
+  <p>Le traitement par Google relève de la <a href="https://policies.google.com/privacy">politique de confidentialité de Google</a> et de la page <a href="https://policies.google.com/technologies/partner-sites">Comment Google utilise les données</a>.</p>
+
+  <h2>4. Permissions Android demandées</h2>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Permission</th><th>Pourquoi</th></tr></thead>
+      <tbody>
+        <tr><td><code>INTERNET</code></td><td>Taux de change, sauvegarde Google Drive, abonnement, publicité récompensée</td></tr>
+        <tr><td><code>com.google.android.gms.permission.AD_ID</code></td><td>Ajoutée par le kit AdMob : lecture de l'identifiant publicitaire de l'appareil, uniquement lorsqu'une vidéo est demandée</td></tr>
+        <tr><td><code>WRITE_EXTERNAL_STORAGE</code><br>Android 9 et antérieurs uniquement</td><td>Écrire un fichier exporté (CSV, JSON, Excel) dans le dossier Téléchargements. Sur Android 10 et suivants, aucune permission n'est requise.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>5. Vos droits</h2>
+  <p>Vos données étant sur votre appareil, vous en disposez directement :</p>
+  <ul>
+    <li><strong>Consulter et corriger</strong> : depuis l'application, à tout moment.</li>
+    <li><strong>Exporter (portabilité)</strong> : Paramètres → Exporter, aux formats JSON, CSV ou Excel.</li>
+    <li><strong>Supprimer</strong> : Paramètres → Réinitialiser, ou désinstallation de l'application. Pour une sauvegarde Google Drive, supprimez le fichier depuis votre Drive.</li>
+    <li><strong>Retirer votre consentement publicitaire</strong> : Paramètres → Abonnement → Préférences publicitaires, à tout moment et aussi facilement que vous l'aviez donné. Vous pouvez également réinitialiser ou supprimer l'identifiant publicitaire depuis les paramètres Android.</li>
+  </ul>
+  <p>Ces droits découlent du RGPD (UE) pour les personnes concernées. N'hébergeant aucune donnée financière, nous ne pouvons ni les fournir ni les supprimer à votre place — mais nous restons joignables à l'adresse indiquée en tête de ce document pour toute question.</p>
+
+  <h2>6. Enfants</h2>
+  <p>L'application ne s'adresse pas aux enfants de moins de 13 ans et ne collecte sciemment aucune donnée les concernant.</p>
+
+  <h2>7. Modifications</h2>
+  <p>Toute évolution de cette politique sera publiée à cette même adresse, avec une nouvelle date de mise à jour. Un changement portant sur la nature des données transmises sera de plus signalé dans l'application.</p>
+
+  <footer>
+    FinanceHub — <code>com.egolahdev.financehub</code>. Cette page est la version de référence de la politique de confidentialité, celle déclarée sur le Google Play Store.
+  </footer>
+
+</main>
+</body>
+</html>
