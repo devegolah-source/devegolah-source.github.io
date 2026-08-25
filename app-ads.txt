@@ -1,0 +1,13 @@
+# app-ads.txt — FinanceHub (com.egolahdev.financehub)
+#
+# Déclare qui a le droit de vendre l'inventaire publicitaire de l'application.
+# Sans ce fichier, un fraudeur peut revendre du faux inventaire sous votre nom,
+# et les acheteurs légitimes se détournent d'un éditeur non vérifié.
+#
+# Il doit être servi à la RACINE du domaine déclaré comme « site web du
+# développeur » sur la fiche Play Store — ici https://egolahdev.github.io —
+# donc à l'adresse https://egolahdev.github.io/app-ads.txt
+#
+# L'identifiant ci-dessous est celui de votre compte AdMob, extrait de l'ID
+# d'application du manifeste (ca-app-pub-8709027998162165~9329068369).
+google.com, pub-8709027998162165, DIRECT, f08c47fec0942fa0
