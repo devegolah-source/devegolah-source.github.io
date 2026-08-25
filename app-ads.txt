@@ -5,9 +5,9 @@
 # et les acheteurs légitimes se détournent d'un éditeur non vérifié.
 #
 # Il doit être servi à la RACINE du domaine déclaré comme « site web du
-# développeur » sur la fiche Play Store — ici https://egolahdev.github.io —
-# donc à l'adresse https://egolahdev.github.io/app-ads.txt
+# développeur » sur la fiche Play Store — ici https://devegolah-source.github.io —
+# donc à l'adresse https://devegolah-source.github.io/app-ads.txt
 #
 # L'identifiant ci-dessous est celui de votre compte AdMob, extrait de l'ID
-# d'application du manifeste (ca-app-pub-8709027998162165~9329068369).
-google.com, pub-8709027998162165, DIRECT, f08c47fec0942fa0
+# d'application du manifeste (ca-app-pub-9183500601801843~3660546936).
+google.com, pub-9183500601801843, DIRECT, f08c47fec0942fa0
