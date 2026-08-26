@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conditions d'utilisation — FinanceHub</title>
+<meta name="description" content="Conditions d'utilisation de l'application FinanceHub : abonnement, résiliation, responsabilités et limites.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+  :root {
+    --ground: #FAFAFC;
+    --surface: #FFFFFF;
+    --surface-2: #F2F2F7;
+    --ink: #15172A;
+    --muted: #565B78;
+    --faint: #8A8FA8;
+    --line: #E2E2EE;
+    --line-strong: #C9C9DC;
+    --accent: #4F46E5;
+    --accent-soft: #EEEDFD;
+    --warn-soft: #FDF3E2;
+    --warn-line: #E9C88A;
+    --warn-ink: #9A5B00;
+    --display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    --body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0D0E19; --surface: #161930; --surface-2: #1E2140;
+      --ink: #E9EAF4; --muted: #A0A5C4; --faint: #767C9E;
+      --line: #282C4C; --line-strong: #3A3F66;
+      --accent: #A5B4FC; --accent-soft: #1E2149;
+      --warn-soft: #2A2214; --warn-line: #5C4A24; --warn-ink: #E9B96B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0D0E19; --surface: #161930; --surface-2: #1E2140;
+    --ink: #E9EAF4; --muted: #A0A5C4; --faint: #767C9E;
+    --line: #282C4C; --line-strong: #3A3F66;
+    --accent: #A5B4FC; --accent-soft: #1E2149;
+    --warn-soft: #2A2214; --warn-line: #5C4A24; --warn-ink: #E9B96B;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 760px; margin: 0 auto; padding: 56px 24px 88px; }
+
+  .eyebrow {
+    font-family: var(--display);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint); margin: 0 0 14px;
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(30px, 5.5vw, 42px);
+    font-weight: 700; letter-spacing: -.025em; line-height: 1.1;
+    text-wrap: balance; margin: 0 0 20px;
+  }
+  h2 {
+    font-family: var(--display);
+    font-size: 24px; font-weight: 600; letter-spacing: -.015em;
+    line-height: 1.25; text-wrap: balance;
+    margin: 48px 0 14px; padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  h3 {
+    font-family: var(--display);
+    font-size: 18px; font-weight: 600;
+    margin: 30px 0 10px;
+  }
+  p, li { max-width: 66ch; }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { font-weight: 600; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  code {
+    font-family: var(--mono); font-size: .85em;
+    background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 4px; padding: 1px 5px; word-break: break-word;
+  }
+
+  .meta {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 0 0 28px;
+    font-size: 15.5px;
+  }
+  .meta dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; }
+  .meta dt {
+    font-family: var(--display); font-size: 11.5px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+    padding-top: 4px; white-space: nowrap;
+  }
+  .meta dd { margin: 0; }
+
+  .todo {
+    background: var(--warn-soft);
+    border: 1px solid var(--warn-line);
+    color: var(--warn-ink);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  .summary {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin: 0 0 8px;
+  }
+  .summary p:last-child { margin-bottom: 0; }
+
+  .callout {
+    background: var(--warn-soft);
+    border: 1px solid var(--warn-line);
+    color: var(--warn-ink);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 0 0 14px;
+  }
+  .callout p { margin: 0 0 10px; max-width: none; }
+  .callout p:last-child { margin-bottom: 0; }
+
+  .tablewrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--surface);
+    margin: 0 0 14px;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 15.5px; min-width: 480px; }
+  th {
+    font-family: var(--display); font-size: 11.5px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+    text-align: left; padding: 12px 16px;
+    border-bottom: 1px solid var(--line-strong); white-space: nowrap;
+  }
+  td { padding: 13px 16px; border-bottom: 1px solid var(--line); vertical-align: top; line-height: 1.5; }
+  tr:last-child td { border-bottom: 0; }
+
+  footer {
+    margin-top: 52px; padding-top: 22px;
+    border-top: 1px solid var(--line);
+    color: var(--faint); font-size: 14.5px;
+  }
+  footer a { color: var(--accent); }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .page { padding: 40px 18px 64px; }
+    .meta dl { grid-template-columns: 1fr; gap: 2px; }
+    .meta dt { padding-top: 10px; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <p class="eyebrow">FinanceHub</p>
+  <h1>Conditions d'utilisation</h1>
+
+  <div class="meta">
+    <dl>
+      <dt>Mise à jour</dt><dd>26 août 2026 · version 1.0.0</dd>
+      <dt>Application</dt><dd>FinanceHub — <code>com.egolahdev.financehub</code></dd>
+      <dt>Éditeur</dt><dd><span class="todo">à compléter — nom ou raison sociale, adresse postale, pays</span></dd>
+      <dt>Contact</dt><dd><span class="todo">à compléter — adresse e-mail</span></dd>
+    </dl>
+  </div>
+
+  <div class="summary">
+    <p><strong>En une phrase.</strong> FinanceHub est un outil de suivi de vos finances, pas un conseiller financier ni une banque. Vous restez responsable de vos décisions et de vos sauvegardes ; nous nous engageons sur le fonctionnement de l'application et sur la transparence de son abonnement.</p>
+  </div>
+
+  <h2>1. Objet et acceptation</h2>
+  <p>Les présentes conditions régissent l'utilisation de l'application mobile FinanceHub, éditée par l'éditeur désigné ci-dessus. En installant ou en utilisant l'application, vous les acceptez.</p>
+  <p>Si vous n'en acceptez pas les termes, n'utilisez pas l'application : sa désinstallation suffit à mettre fin à la relation, sous réserve des abonnements en cours (section 5).</p>
+  <p>La <a href="confidentialite.html">politique de confidentialité</a> fait partie intégrante des présentes conditions.</p>
+
+  <h2>2. Description du service</h2>
+  <p>FinanceHub est une application de gestion de finances personnelles qui fonctionne <strong>sur votre appareil</strong>. Elle permet de tenir des comptes, d'enregistrer des opérations, de définir des budgets et des objectifs, de suivre des dettes et des échéances récurrentes, de produire des rapports et d'exporter vos données.</p>
+  <p>Aucun compte utilisateur n'est nécessaire, et aucun serveur appartenant à l'éditeur ne reçoit vos données financières. L'application se connecte au réseau uniquement pour les usages décrits dans la politique de confidentialité : taux de change, sauvegarde Google Drive que vous activez vous-même, gestion de l'abonnement et publicité récompensée.</p>
+
+  <h2>3. Conditions d'accès</h2>
+  <p>L'application s'adresse aux personnes majeures ou disposant de l'autorisation de leur représentant légal. Un compte Google est nécessaire pour souscrire un abonnement et, si vous le souhaitez, pour utiliser la sauvegarde Google Drive — mais pas pour utiliser l'application elle-même.</p>
+  <p>Vous êtes responsable de la sécurité de l'appareil sur lequel l'application est installée. Les données étant conservées localement, quiconque déverrouille votre appareil accède à vos informations financières.</p>
+
+  <h2>4. Version gratuite et version Premium</h2>
+  <p>L'application est utilisable gratuitement, dans les limites suivantes. La version Premium lève ces limites et ouvre les fonctions avancées.</p>
+
+  <div class="tablewrap">
+    <table>
+      <tr>
+        <th>&nbsp;</th>
+        <th>Gratuit</th>
+        <th>Premium</th>
+      </tr>
+      <tr><td>Comptes</td><td>2</td><td>Illimités</td></tr>
+      <tr><td>Budgets</td><td>3</td><td>Illimités</td></tr>
+      <tr><td>Objectifs</td><td>2</td><td>Illimités</td></tr>
+      <tr><td>Règles de classement</td><td>—</td><td>Illimitées</td></tr>
+      <tr><td>Historique des rapports</td><td>3 mois</td><td>24 mois</td></tr>
+      <tr><td>Export Excel, impression, rapports avancés, échéances automatiques, sauvegarde cloud</td><td>—</td><td>Inclus</td></tr>
+    </table>
+  </div>
+
+  <p>Les opérations déjà saisies ne sont jamais supprimées ni rendues inaccessibles par le passage à la version gratuite : seule la création de nouveaux éléments au-delà des limites est bloquée, et vos données restent exportables à tout moment.</p>
+
+  <h2>5. Abonnement Premium</h2>
+
+  <h3>5.1 Formules et tarifs</h3>
+  <p>Deux formules sont proposées : <strong>4,99 USD par mois</strong> ou <strong>39,99 USD par an</strong>. Le prix affiché dans l'application au moment de l'achat, converti dans votre devise locale et taxes comprises selon votre pays, fait foi. Ces tarifs peuvent évoluer ; toute modification est sans effet sur une période déjà payée.</p>
+  <p>Un <strong>essai gratuit de 3 jours</strong> peut être proposé lors du premier abonnement. Il n'est utilisable qu'une fois.</p>
+
+  <h3>5.2 Facturation et renouvellement</h3>
+  <p>L'abonnement est vendu et facturé par <strong>Google Play</strong>, via votre compte Google. L'éditeur ne reçoit ni ne conserve vos données de paiement.</p>
+  <p>L'abonnement est <strong>reconduit automatiquement</strong> à la fin de chaque période, au tarif alors en vigueur, sauf résiliation avant la date de renouvellement. Si un essai gratuit était en cours, il se transforme en abonnement payant à son échéance, sauf résiliation avant ce terme.</p>
+
+  <h3>5.3 Résiliation</h3>
+  <p>Vous pouvez résilier à tout moment depuis <strong>Google Play → Menu → Paiements et abonnements → Abonnements</strong>, ou depuis le lien prévu dans l'application. La résiliation prend effet à la fin de la période en cours : vous conservez l'accès Premium jusque-là, sans reconduction ensuite.</p>
+  <p>Désinstaller l'application ne résilie pas l'abonnement. La résiliation doit être faite depuis votre compte Google.</p>
+
+  <h3>5.4 Remboursement</h3>
+  <p>Les demandes de remboursement relèvent de la <strong>politique de Google Play</strong> et se font auprès de Google, l'éditeur n'ayant pas accès à la transaction. Vos droits légaux de rétractation, lorsque la législation de votre pays en prévoit, restent entiers.</p>
+
+  <h3>5.5 Restauration des achats</h3>
+  <p>Un abonnement actif est rattaché à votre compte Google et peut être restauré sur un nouvel appareil depuis l'écran Premium de l'application. Cette restauration ne rétablit pas vos données financières, qui sont locales : pour cela, utilisez un export ou la sauvegarde Google Drive.</p>
+
+  <h2>6. Déblocage par publicité récompensée</h2>
+  <p>Sans abonnement, une fonction payante peut être débloquée pendant <strong>une journée</strong> en visionnant une vidéo publicitaire, à votre initiative.</p>
+  <p>C'est la seule publicité de l'application : il n'y a ni bannière, ni écran publicitaire, ni publicité au lancement, et aucune vidéo ne se déclenche sans un appui volontaire de votre part. Un abonné Premium n'en voit aucune. La disponibilité d'une vidéo dépend de la régie publicitaire et n'est pas garantie.</p>
+
+  <h2>7. Vos données et vos sauvegardes</h2>
+  <div class="callout">
+    <p><strong>La sauvegarde vous incombe.</strong> Vos données sont enregistrées sur votre appareil et nulle part ailleurs. Désinstaller l'application, effacer ses données, perdre ou réinitialiser l'appareil <strong>supprime définitivement</strong> votre historique.</p>
+    <p>L'éditeur ne détient aucune copie de vos données et ne peut donc pas les restaurer. Utilisez l'export manuel (Paramètres → Exporter) ou la sauvegarde Google Drive régulièrement.</p>
+  </div>
+  <p>Vous restez propriétaire des données que vous saisissez. Le traitement de ces données est décrit dans la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+
+  <h2>8. Ce que l'application n'est pas</h2>
+  <p>FinanceHub est un <strong>outil de suivi et de calcul</strong>. Elle ne fournit ni conseil en investissement, ni conseil fiscal, ni conseil juridique, ni recommandation financière personnalisée, et ne se substitue pas à l'avis d'un professionnel qualifié.</p>
+  <p>Les taux de change proviennent d'une source publique tierce, sont mis à jour au plus une fois par jour et sont fournis <strong>à titre indicatif</strong>. Ils ne reflètent pas les taux appliqués par votre banque et ne conviennent pas à une opération de change réelle.</p>
+  <p>Les montants, projections et rapports produits par l'application dépendent des données que vous saisissez. Vous restez seul responsable de leur exactitude, du rapprochement avec vos relevés bancaires réels et des décisions que vous prenez à partir d'eux.</p>
+
+  <h2>9. Utilisation acceptable</h2>
+  <p>Vous vous engagez à ne pas : contourner les limitations de la version gratuite ou le mécanisme d'abonnement ; générer artificiellement des impressions ou des clics publicitaires ; décompiler, désassembler ou modifier l'application, sauf dans les limites permises par la loi ; en faire un usage illicite ou frauduleux.</p>
+  <p>Le non-respect de ces engagements peut entraîner la suspension de l'accès aux fonctions concernées.</p>
+
+  <h2>10. Propriété intellectuelle</h2>
+  <p>L'application, son nom, son logo, son interface et son code demeurent la propriété de l'éditeur. Vous bénéficiez d'un droit d'usage personnel, non exclusif et non transférable, pour la durée de votre utilisation.</p>
+  <p>Ce droit ne couvre pas vos propres données, qui vous appartiennent, ni les composants tiers intégrés à l'application, régis par leurs licences respectives.</p>
+
+  <h2>11. Disponibilité et évolutions</h2>
+  <p>L'application fonctionnant hors ligne, son usage courant ne dépend pas de la disponibilité d'un service. Les fonctions connectées — taux de change, sauvegarde Google Drive, abonnement, publicité récompensée — dépendent en revanche de services tiers dont l'éditeur ne maîtrise pas la disponibilité.</p>
+  <p>L'éditeur peut faire évoluer l'application, ajouter ou retirer des fonctions. Le retrait d'une fonction substantielle incluse dans un abonnement en cours ouvrirait droit à la résiliation de celui-ci.</p>
+
+  <h2>12. Limitation de responsabilité</h2>
+  <p>L'application est fournie en l'état. Dans les limites permises par la loi applicable, l'éditeur ne saurait être tenu responsable des pertes de données consécutives à une désinstallation, à une réinitialisation ou à une panne de votre appareil, ni des décisions financières prises sur la base des informations affichées, ni des dommages indirects.</p>
+  <p>Rien dans les présentes conditions n'exclut la responsabilité de l'éditeur en cas de faute lourde ou de dol, ni les garanties légales impératives dont vous bénéficiez en tant que consommateur.</p>
+
+  <h2>13. Modification des conditions</h2>
+  <p>Les présentes conditions peuvent être modifiées, notamment pour tenir compte d'évolutions de l'application ou de la réglementation. La date de mise à jour figure en tête de page. Une modification substantielle sera signalée dans l'application, et la poursuite de l'utilisation vaudra acceptation.</p>
+
+  <h2>14. Droit applicable</h2>
+  <p>Les présentes conditions sont régies par le droit <span class="todo">à compléter — pays de l'éditeur</span>. En cas de litige, une solution amiable sera recherchée en priorité, par écrit à l'adresse de contact indiquée en tête de page.</p>
+  <p>Si vous êtes consommateur, cette clause ne vous prive pas de la protection des dispositions impératives du droit de votre pays de résidence, ni de la possibilité de saisir les juridictions compétentes de ce pays.</p>
+
+  <h2>15. Contact</h2>
+  <p>Pour toute question relative aux présentes conditions, à un abonnement ou au fonctionnement de l'application, écrivez à l'adresse indiquée en tête de page.</p>
+
+  <footer>
+    <p>FinanceHub · <a href="index.html">Accueil</a> · <a href="confidentialite.html">Politique de confidentialité</a></p>
+  </footer>
+
+</main>
+</body>
+</html>
