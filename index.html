@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FinanceHub — Gestion de finances personnelles</title>
+<meta name="description" content="FinanceHub : comptes, budgets, objectifs et rapports. Une application de finances personnelles qui garde vos données sur votre appareil.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+  :root {
+    --ground: #FAFAFC;
+    --surface: #FFFFFF;
+    --surface-2: #F2F2F7;
+    --ink: #15172A;
+    --muted: #565B78;
+    --faint: #8A8FA8;
+    --line: #E2E2EE;
+    --line-strong: #C9C9DC;
+    --accent: #4F46E5;
+    --accent-soft: #EEEDFD;
+    --warn-soft: #FDF3E2;
+    --warn-line: #E9C88A;
+    --warn-ink: #9A5B00;
+    --display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    --body: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0D0E19; --surface: #161930; --surface-2: #1E2140;
+      --ink: #E9EAF4; --muted: #A0A5C4; --faint: #767C9E;
+      --line: #282C4C; --line-strong: #3A3F66;
+      --accent: #A5B4FC; --accent-soft: #1E2149;
+      --warn-soft: #2A2214; --warn-line: #5C4A24; --warn-ink: #E9B96B;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0D0E19; --surface: #161930; --surface-2: #1E2140;
+    --ink: #E9EAF4; --muted: #A0A5C4; --faint: #767C9E;
+    --line: #282C4C; --line-strong: #3A3F66;
+    --accent: #A5B4FC; --accent-soft: #1E2149;
+    --warn-soft: #2A2214; --warn-line: #5C4A24; --warn-ink: #E9B96B;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 760px; margin: 0 auto; padding: 56px 24px 88px; }
+
+  .brand { display: flex; align-items: center; gap: 14px; margin: 0 0 26px; }
+  .brand svg { width: 40px; height: 40px; flex: none; }
+  .brand span {
+    font-family: var(--display);
+    font-size: 12px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--faint);
+  }
+  h1 {
+    font-family: var(--display);
+    font-size: clamp(30px, 5.5vw, 42px);
+    font-weight: 700; letter-spacing: -.025em; line-height: 1.1;
+    text-wrap: balance; margin: 0 0 20px;
+  }
+  h2 {
+    font-family: var(--display);
+    font-size: 24px; font-weight: 600; letter-spacing: -.015em;
+    line-height: 1.25; text-wrap: balance;
+    margin: 48px 0 14px; padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .lead { font-size: 19px; color: var(--muted); max-width: 62ch; margin: 0 0 26px; }
+  p, li { max-width: 66ch; }
+  p { margin: 0 0 14px; }
+  ul { margin: 0 0 14px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  strong { font-weight: 600; }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+  code {
+    font-family: var(--mono); font-size: .85em;
+    background: var(--surface-2); border: 1px solid var(--line);
+    border-radius: 4px; padding: 1px 5px; word-break: break-word;
+  }
+
+  .summary {
+    background: var(--accent-soft);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin: 0 0 8px;
+  }
+  .summary p:last-child { margin-bottom: 0; }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin: 0 0 14px;
+  }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+  }
+  .card h3 {
+    font-family: var(--display);
+    font-size: 16px; font-weight: 600;
+    margin: 0 0 6px;
+  }
+  .card p { font-size: 15.5px; color: var(--muted); margin: 0; max-width: none; }
+
+  .meta {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin: 0 0 28px;
+    font-size: 15.5px;
+  }
+  .meta dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 6px 18px; }
+  .meta dt {
+    font-family: var(--display); font-size: 11.5px; font-weight: 600;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--faint);
+    padding-top: 4px; white-space: nowrap;
+  }
+  .meta dd { margin: 0; }
+
+  .todo {
+    background: var(--warn-soft);
+    border: 1px solid var(--warn-line);
+    color: var(--warn-ink);
+    border-radius: 6px;
+    padding: 2px 8px;
+    font-size: 14px;
+    display: inline-block;
+  }
+
+  footer {
+    margin-top: 52px; padding-top: 22px;
+    border-top: 1px solid var(--line);
+    color: var(--faint); font-size: 14.5px;
+  }
+  footer a { color: var(--accent); }
+
+  @media (max-width: 560px) {
+    body { font-size: 16px; }
+    .page { padding: 40px 18px 64px; }
+    .lead { font-size: 17.5px; }
+    .meta dl { grid-template-columns: 1fr; gap: 2px; }
+    .meta dt { padding-top: 10px; }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+
+  <div class="brand">
+    <!-- Logo de marque, même tracé que BrandLogo (src/components/ui). -->
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="#4F46E5" fill-rule="evenodd" aria-hidden="true">
+      <path d="M84,0 110,0 110,85 85,110 84,110Z
+        M42,34 68,34 68,97 66,97 57,87 53,87 44,97 42,97Z
+        M0,67 26,67 26,114 1,139 0,139Z
+        M118,68 160,68 160,110 143,110 143,97 142,97 86,154 84,154 78,147 76,147 71,141 69,141 57,129 54,129 24,160 1,160 54,106 56,108 58,108 63,114 65,114 70,120 72,120 77,126 79,126 83,131 85,131 131,85 131,84 118,84Z" />
+    </svg>
+    <span>FinanceHub</span>
+  </div>
+
+  <h1>Vos finances, sur votre appareil</h1>
+  <p class="lead">Comptes, opérations, budgets, objectifs et rapports — réunis dans une application qui n'envoie rien nulle part.</p>
+
+  <div class="summary">
+    <p><strong>Le principe.</strong> FinanceHub fonctionne hors ligne. Il n'y a pas de compte à créer, pas de serveur qui reçoit vos données financières, et aucun traceur. Une sauvegarde vers votre propre Google Drive existe — mais c'est vous qui l'activez, quand vous le voulez.</p>
+  </div>
+
+  <h2>Ce que l'application fait</h2>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Comptes et opérations</h3>
+      <p>Plusieurs comptes, plusieurs devises, avec conversion à partir de taux publics mis à jour une fois par jour.</p>
+    </div>
+    <div class="card">
+      <h3>Budgets et objectifs</h3>
+      <p>Des enveloppes par catégorie, des objectifs d'épargne, et le suivi de ce qu'il reste à chaque instant.</p>
+    </div>
+    <div class="card">
+      <h3>Récurrences et dettes</h3>
+      <p>Les charges qui reviennent chaque mois sont posées une fois. Les dettes et les prêts se suivent au même endroit.</p>
+    </div>
+    <div class="card">
+      <h3>Rapports</h3>
+      <p>Répartition par catégorie, évolution dans le temps, et export en CSV, JSON ou Excel quand vous voulez vos chiffres ailleurs.</p>
+    </div>
+    <div class="card">
+      <h3>Six langues</h3>
+      <p>Français, anglais, espagnol, portugais, allemand et arabe — cette dernière avec une interface entièrement de droite à gauche.</p>
+    </div>
+    <div class="card">
+      <h3>Import de relevés</h3>
+      <p>Import CSV avec des règles de classement que vous définissez, pour ne pas ressaisir ce que votre banque exporte déjà.</p>
+    </div>
+  </div>
+
+  <h2>Vos données</h2>
+  <p>Tout ce que vous saisissez reste dans le stockage local de l'application. La sauvegarde automatique d'Android y est désactivée, afin que ces données ne partent pas vers votre compte Google à votre insu.</p>
+  <p>Si vous activez la sauvegarde Google Drive, l'application ne demande que la portée <code>drive.file</code> : elle ne voit que les fichiers qu'elle a elle-même créés, jamais le reste de votre Drive. Les sauvegardes atterrissent dans un dossier <code>FinanceHub</code> visible, que vous pouvez ouvrir, copier ou supprimer vous-même.</p>
+  <p>Le détail complet est dans la <a href="confidentialite.html">politique de confidentialité</a>.</p>
+
+  <h2>Version Premium</h2>
+  <p>L'application est utilisable gratuitement. Un abonnement Premium débloque les fonctions avancées et retire toute publicité. Sans abonnement, la seule publicité de l'application est une vidéo que <strong>vous choisissez</strong> de regarder pour débloquer une fonction payante pendant une journée : il n'y a ni bannière, ni écran publicitaire, ni publicité au lancement.</p>
+
+  <h2>Contact</h2>
+  <div class="meta">
+    <dl>
+      <dt>Application</dt><dd>FinanceHub — <code>com.egolahdev.financehub</code></dd>
+      <dt>Éditeur</dt><dd><span class="todo">à compléter — nom ou raison sociale</span></dd>
+      <dt>Assistance</dt><dd><span class="todo">à compléter — adresse e-mail</span></dd>
+    </dl>
+  </div>
+  <p>Pour une question, un signalement de bug ou une demande concernant vos données, écrivez à l'adresse d'assistance ci-dessus.</p>
+
+  <footer>
+    <p>FinanceHub · <a href="confidentialite.html">Politique de confidentialité</a></p>
+  </footer>
+
+</main>
+</body>
+</html>
