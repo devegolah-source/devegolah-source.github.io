@@ -1,16 +1,22 @@
 <!doctype html>
 <html lang="fr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FinanceHub — Gestion de finances personnelles</title>
-<meta name="description" content="FinanceHub : comptes, budgets, objectifs et rapports. Une application de finances personnelles qui garde vos données sur votre appareil.">
-<meta name="theme-color" content="#6366f1">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
-<style>
-  /*
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FinanceHub — Gestion de finances personnelles</title>
+    <meta
+      name="description"
+      content="FinanceHub : comptes, budgets, objectifs et rapports. Une application de finances personnelles qui garde vos données sur votre appareil."
+    />
+    <meta name="theme-color" content="#6366f1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <style>
+      /*
     Reproduction statique de l'écran d'accueil de l'application
     (src/pages/Dashboard.tsx), avec le jeu de démonstration de src/data/seed.ts.
 
@@ -23,740 +29,1541 @@
     Les graphiques de Recharts sont redessinés en SVG en ligne : mêmes couleurs
     (#10b981 revenus, #f43f5e dépenses), mêmes formes.
   */
-  :root {
-    --ground: #f8fafc;      /* slate-50  */
-    --surface: #ffffff;
-    --ink: #0f172a;         /* slate-900 */
-    --muted: #64748b;       /* slate-500 */
-    --faint: #94a3b8;       /* slate-400 */
-    --line: #e2e8f0;        /* slate-200 */
-    --line-soft: #f1f5f9;   /* slate-100 */
-    --track: #e2e8f0;
-    --brand-50: #eef2ff;
-    --brand-500: #6366f1;
-    --brand-600: #4f46e5;
-    --brand-700: #4338ca;
-    --green: #059669;
-    --green-soft: #ecfdf5;
-    --red: #e11d48;
-    --red-soft: #fff1f2;
-    --amber: #d97706;
-    --amber-soft: #fffbeb;
-    --sky: #0284c7;
-    --shadow: 0 1px 2px 0 rgb(0 0 0 / .05);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --ground: #020617;    /* slate-950 */
-      --surface: #0f172a;   /* slate-900 */
-      --ink: #e2e8f0;
-      --muted: #94a3b8;
-      --faint: #64748b;
-      --line: #1e293b;      /* slate-800 */
-      --line-soft: #1e293b;
-      --track: #1e293b;
-      --brand-50: rgb(99 102 241 / .10);
-      --brand-600: #a5b4fc;
-      --brand-700: #c7d2fe;
-      --green: #34d399;
-      --green-soft: rgb(16 185 129 / .10);
-      --red: #fb7185;
-      --red-soft: rgb(244 63 94 / .10);
-      --amber: #fbbf24;
-      --amber-soft: rgb(245 158 11 / .10);
-      --sky: #38bdf8;
-      --shadow: 0 1px 2px 0 rgb(0 0 0 / .4);
-    }
-  }
+      :root {
+        --ground: #f8fafc; /* slate-50  */
+        --surface: #ffffff;
+        --ink: #0f172a; /* slate-900 */
+        --muted: #64748b; /* slate-500 */
+        --faint: #94a3b8; /* slate-400 */
+        --line: #e2e8f0; /* slate-200 */
+        --line-soft: #f1f5f9; /* slate-100 */
+        --track: #e2e8f0;
+        --brand-50: #eef2ff;
+        --brand-500: #6366f1;
+        --brand-600: #4f46e5;
+        --brand-700: #4338ca;
+        --green: #059669;
+        --green-soft: #ecfdf5;
+        --red: #e11d48;
+        --red-soft: #fff1f2;
+        --amber: #d97706;
+        --amber-soft: #fffbeb;
+        --sky: #0284c7;
+        --shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --ground: #020617; /* slate-950 */
+          --surface: #0f172a; /* slate-900 */
+          --ink: #e2e8f0;
+          --muted: #94a3b8;
+          --faint: #64748b;
+          --line: #1e293b; /* slate-800 */
+          --line-soft: #1e293b;
+          --track: #1e293b;
+          --brand-50: rgb(99 102 241 / 0.1);
+          --brand-600: #a5b4fc;
+          --brand-700: #c7d2fe;
+          --green: #34d399;
+          --green-soft: rgb(16 185 129 / 0.1);
+          --red: #fb7185;
+          --red-soft: rgb(244 63 94 / 0.1);
+          --amber: #fbbf24;
+          --amber-soft: rgb(245 158 11 / 0.1);
+          --sky: #38bdf8;
+          --shadow: 0 1px 2px 0 rgb(0 0 0 / 0.4);
+        }
+      }
 
-  * { box-sizing: border-box; }
-  html { background: var(--ground); }
-  body {
-    margin: 0;
-    background: var(--ground);
-    color: var(--ink);
-    font-family: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-  }
-  .tnum { font-variant-numeric: tabular-nums; }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        background: var(--ground);
+      }
+      body {
+        margin: 0;
+        background: var(--ground);
+        color: var(--ink);
+        font-family:
+          "Inter",
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      .tnum {
+        font-variant-numeric: tabular-nums;
+      }
 
-  /* ---------------------------------------------------------- chrome ---- */
+      /* ---------------------------------------------------------- chrome ---- */
 
-  .topbar {
-    position: sticky; top: 0; z-index: 20;
-    display: flex; align-items: center; gap: 10px;
-    padding: 12px 16px;
-    background: color-mix(in srgb, var(--ground) 80%, transparent);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--line);
-  }
-  .topbar svg { width: 26px; height: 26px; flex: none; }
-  .topbar b { font-size: 16px; font-weight: 600; letter-spacing: -.01em; }
-  .topbar b i { font-style: normal; color: var(--brand-600); }
-  .topbar .spacer { flex: 1; }
-  .topbar a {
-    font-size: 13px; font-weight: 500; color: var(--muted);
-    text-decoration: none; padding: 6px 10px; border-radius: 10px;
-  }
-  .topbar a:hover { background: var(--line-soft); color: var(--ink); }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        background: color-mix(in srgb, var(--ground) 80%, transparent);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+      }
+      .topbar svg {
+        width: 26px;
+        height: 26px;
+        flex: none;
+      }
+      .topbar b {
+        font-size: 16px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .topbar b i {
+        font-style: normal;
+        color: var(--brand-600);
+      }
+      .topbar .spacer {
+        flex: 1;
+      }
+      .topbar a {
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        padding: 6px 10px;
+        border-radius: 10px;
+      }
+      .topbar a:hover {
+        background: var(--line-soft);
+        color: var(--ink);
+      }
 
-  .shell { max-width: 1180px; margin: 0 auto; padding: 20px 16px 56px; }
-  .stack > * + * { margin-top: 24px; }
+      .shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 20px 16px 56px;
+      }
+      .stack > * + * {
+        margin-top: 24px;
+      }
 
-  /* ----------------------------------------------------------- cartes --- */
+      /* ----------------------------------------------------------- cartes --- */
 
-  .card {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    box-shadow: var(--shadow);
-    padding: 20px;
-  }
-  .chead {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    gap: 12px; margin-bottom: 16px;
-  }
-  .chead .left { display: flex; align-items: center; gap: 12px; min-width: 0; }
-  .chead .ico {
-    display: grid; place-items: center;
-    width: 36px; height: 36px; flex: none;
-    border-radius: 12px;
-    background: var(--brand-50); color: var(--brand-600);
-  }
-  .chead h2 { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -.01em; }
-  .chead p { margin: 0; font-size: 12px; color: var(--muted); }
-  .ghost {
-    font-size: 12px; font-weight: 500; color: var(--muted);
-    text-decoration: none; padding: 5px 9px; border-radius: 9px;
-    white-space: nowrap;
-  }
-  .ghost:hover { background: var(--line-soft); color: var(--ink); }
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        padding: 20px;
+      }
+      .chead {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .chead .left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+      }
+      .chead .ico {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        flex: none;
+        border-radius: 12px;
+        background: var(--brand-50);
+        color: var(--brand-600);
+      }
+      .chead h2 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      .chead p {
+        margin: 0;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .ghost {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--muted);
+        text-decoration: none;
+        padding: 5px 9px;
+        border-radius: 9px;
+        white-space: nowrap;
+      }
+      .ghost:hover {
+        background: var(--line-soft);
+        color: var(--ink);
+      }
 
-  /* -------------------------------------------------- sélecteur de mois - */
+      /* -------------------------------------------------- sélecteur de mois - */
 
-  .monthbar {
-    display: inline-flex; align-items: center; gap: 4px;
-    border: 1px solid var(--line); background: var(--surface);
-    border-radius: 12px; padding: 4px;
-  }
-  .monthbar button {
-    display: grid; place-items: center;
-    width: 30px; height: 30px; padding: 0;
-    border: 0; border-radius: 9px; background: none;
-    color: var(--muted); cursor: pointer;
-  }
-  .monthbar button:hover { background: var(--line-soft); color: var(--ink); }
-  .monthbar button[disabled] { opacity: .4; cursor: default; }
-  .monthbar span {
-    min-width: 150px; text-align: center;
-    font-size: 13px; font-weight: 500; text-transform: capitalize;
-  }
+      .monthbar {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        border-radius: 12px;
+        padding: 4px;
+      }
+      .monthbar button {
+        display: grid;
+        place-items: center;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        border: 0;
+        border-radius: 9px;
+        background: none;
+        color: var(--muted);
+        cursor: pointer;
+      }
+      .monthbar button:hover {
+        background: var(--line-soft);
+        color: var(--ink);
+      }
+      .monthbar button[disabled] {
+        opacity: 0.4;
+        cursor: default;
+      }
+      .monthbar span {
+        min-width: 150px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
 
-  /* ------------------------------------------------------ indicateurs --- */
+      /* ------------------------------------------------------ indicateurs --- */
 
-  .tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
-  .tile {
-    background: var(--surface); border: 1px solid var(--line);
-    border-radius: 16px; box-shadow: var(--shadow); padding: 18px;
-  }
-  .tile .row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
-  .tile .lbl { font-size: 12px; font-weight: 500; color: var(--muted); }
-  .tile .badge {
-    display: grid; place-items: center;
-    width: 34px; height: 34px; flex: none; border-radius: 11px;
-  }
-  .tile .val { margin: 10px 0 0; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
-  .tile .delta { margin: 4px 0 0; font-size: 12px; font-weight: 500; }
-  .b-brand { background: var(--brand-50); color: var(--brand-600); }
-  .b-green { background: var(--green-soft); color: var(--green); }
-  .b-red   { background: var(--red-soft);   color: var(--red); }
-  .b-amber { background: var(--amber-soft); color: var(--amber); }
-  .up { color: var(--green); }
-  .down { color: var(--red); }
+      .tiles {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+      .tile {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+      .tile .row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .tile .lbl {
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--muted);
+      }
+      .tile .badge {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        flex: none;
+        border-radius: 11px;
+      }
+      .tile .val {
+        margin: 10px 0 0;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .tile .delta {
+        margin: 4px 0 0;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .b-brand {
+        background: var(--brand-50);
+        color: var(--brand-600);
+      }
+      .b-green {
+        background: var(--green-soft);
+        color: var(--green);
+      }
+      .b-red {
+        background: var(--red-soft);
+        color: var(--red);
+      }
+      .b-amber {
+        background: var(--amber-soft);
+        color: var(--amber);
+      }
+      .up {
+        color: var(--green);
+      }
+      .down {
+        color: var(--red);
+      }
 
-  /* ----------------------------------------------------------- grilles -- */
+      /* ----------------------------------------------------------- grilles -- */
 
-  /*
+      /*
      `min-width: 0` sur les enfants : transposition du `[&>*]:min-w-0` que
      Dashboard.tsx pose sur ses grilles. Sans lui, une piste `1fr` vaut
      `minmax(auto, 1fr)` et ne descend jamais sous la largeur min-content de
      son contenu — une ligne d'opération suffit alors à élargir la carte
      au-delà de l'écran, et toute la page défile horizontalement.
   */
-  .grid3 { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
-  .grid3 > * { min-width: 0; }
-  .tiles > * { min-width: 0; }
-  .span2 { grid-column: auto; }
+      .grid3 {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 16px;
+      }
+      .grid3 > * {
+        min-width: 0;
+      }
+      .tiles > * {
+        min-width: 0;
+      }
+      .span2 {
+        grid-column: auto;
+      }
 
-  /* ------------------------------------------------------------ listes -- */
+      /* ------------------------------------------------------------ listes -- */
 
-  .rows { list-style: none; margin: 0; padding: 0; }
-  .rows.divided > li + li { border-top: 1px solid var(--line-soft); }
-  .rows.spaced > li + li { margin-top: 12px; }
-  .txrow { display: flex; align-items: center; gap: 12px; padding: 10px 0; }
-  .avatar {
-    display: grid; place-items: center;
-    width: 36px; height: 36px; flex: none;
-    border-radius: 12px;
-    font-size: 11px; font-weight: 600; color: #fff;
-  }
-  .txrow .body { min-width: 0; flex: 1; }
-  .txrow .body .name {
-    margin: 0; font-size: 14px; font-weight: 500;
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  }
-  .txrow .body .sub {
-    margin: 0; font-size: 12px; color: var(--muted);
-    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  }
-  .amount { flex: none; font-size: 14px; font-weight: 600; }
+      .rows {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .rows.divided > li + li {
+        border-top: 1px solid var(--line-soft);
+      }
+      .rows.spaced > li + li {
+        margin-top: 12px;
+      }
+      .txrow {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+      }
+      .avatar {
+        display: grid;
+        place-items: center;
+        width: 36px;
+        height: 36px;
+        flex: none;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: 600;
+        color: #fff;
+      }
+      .txrow .body {
+        min-width: 0;
+        flex: 1;
+      }
+      .txrow .body .name {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .txrow .body .sub {
+        margin: 0;
+        font-size: 12px;
+        color: var(--muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .amount {
+        flex: none;
+        font-size: 14px;
+        font-weight: 600;
+      }
 
-  .swatch { width: 36px; height: 36px; flex: none; border-radius: 12px; }
-  .dot { width: 10px; height: 10px; flex: none; border-radius: 999px; }
+      .swatch {
+        width: 36px;
+        height: 36px;
+        flex: none;
+        border-radius: 12px;
+      }
+      .dot {
+        width: 10px;
+        height: 10px;
+        flex: none;
+        border-radius: 999px;
+      }
 
-  /* --------------------------------------------------------- progrès ---- */
+      /* --------------------------------------------------------- progrès ---- */
 
-  .track { height: 8px; width: 100%; overflow: hidden; border-radius: 999px; background: var(--track); }
-  .track > i { display: block; height: 100%; border-radius: 999px; }
-  .plabel {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 8px; margin-bottom: 6px; font-size: 14px;
-  }
-  .plabel .amt { color: var(--muted); }
+      .track {
+        height: 8px;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 999px;
+        background: var(--track);
+      }
+      .track > i {
+        display: block;
+        height: 100%;
+        border-radius: 999px;
+      }
+      .plabel {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        margin-bottom: 6px;
+        font-size: 14px;
+      }
+      .plabel .amt {
+        color: var(--muted);
+      }
 
-  /* ------------------------------------------------------ graphiques ---- */
+      /* ------------------------------------------------------ graphiques ---- */
 
-  .chart { width: 100%; height: auto; display: block; }
-  .grid-line { stroke: var(--line); stroke-dasharray: 3 3; }
-  .axis { fill: var(--faint); font-size: 11px; }
-  .legend { display: flex; gap: 18px; justify-content: center; margin-top: 8px; font-size: 12px; color: var(--muted); }
-  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+      .chart {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .grid-line {
+        stroke: var(--line);
+        stroke-dasharray: 3 3;
+      }
+      .axis {
+        fill: var(--faint);
+        font-size: 11px;
+      }
+      .legend {
+        display: flex;
+        gap: 18px;
+        justify-content: center;
+        margin-top: 8px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .legend span {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
 
-  .donutwrap { position: relative; display: grid; place-items: center; }
-  .donutwrap .mid { position: absolute; text-align: center; }
-  .donutwrap .mid b { display: block; font-size: 17px; font-weight: 600; letter-spacing: -.02em; }
-  .donutwrap .mid small { font-size: 11px; color: var(--muted); }
+      .donutwrap {
+        position: relative;
+        display: grid;
+        place-items: center;
+      }
+      .donutwrap .mid {
+        position: absolute;
+        text-align: center;
+      }
+      .donutwrap .mid b {
+        display: block;
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .donutwrap .mid small {
+        font-size: 11px;
+        color: var(--muted);
+      }
 
-  .catrow { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 14px; }
-  .catrow .l { display: flex; align-items: center; gap: 8px; min-width: 0; }
-  .catrow .l span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .catrow .r { flex: none; font-weight: 500; }
-  .catrow .r small { color: var(--faint); font-size: 12px; font-weight: 400; }
+      .catrow {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 14px;
+      }
+      .catrow .l {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        min-width: 0;
+      }
+      .catrow .l span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .catrow .r {
+        flex: none;
+        font-weight: 500;
+      }
+      .catrow .r small {
+        color: var(--faint);
+        font-size: 12px;
+        font-weight: 400;
+      }
 
-  /* ---------------------------------------------------------- footer ---- */
+      /* ---------------------------------------------------------- footer ---- */
 
-  footer {
-    max-width: 1180px; margin: 0 auto;
-    padding: 24px 16px 40px;
-    border-top: 1px solid var(--line);
-    color: var(--muted); font-size: 13px;
-  }
-  footer a { color: var(--brand-600); }
-  footer p { margin: 0 0 6px; }
+      footer {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 24px 16px 40px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 13px;
+      }
+      footer a {
+        color: var(--brand-600);
+      }
+      footer p {
+        margin: 0 0 6px;
+      }
 
-  .note {
-    margin: 0 0 20px; padding: 12px 16px;
-    border: 1px solid var(--line); border-radius: 12px;
-    background: var(--surface);
-    font-size: 13px; color: var(--muted);
-  }
+      .note {
+        margin: 0 0 20px;
+        padding: 12px 16px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--surface);
+        font-size: 13px;
+        color: var(--muted);
+      }
 
-  /* -------------------------------------------------------- responsive -- */
+      /* -------------------------------------------------------- responsive -- */
 
-  @media (min-width: 640px) {
-    .shell { padding: 24px 24px 64px; }
-    .tiles { gap: 16px; }
-    .grid3 { gap: 20px; }
-  }
-  @media (min-width: 1024px) {
-    .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .grid3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .span2 { grid-column: span 2; }
-    .side { display: flex; flex-direction: column; }
-  }
-</style>
-</head>
-<body>
-
-<header class="topbar">
-  <!-- Logo de marque, même tracé que BrandLogo (src/components/ui). -->
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="#6366f1" fill-rule="evenodd" aria-hidden="true">
-    <path d="M84,0 110,0 110,85 85,110 84,110Z
+      @media (min-width: 640px) {
+        .shell {
+          padding: 24px 24px 64px;
+        }
+        .tiles {
+          gap: 16px;
+        }
+        .grid3 {
+          gap: 20px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .tiles {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+        .grid3 {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+        .span2 {
+          grid-column: span 2;
+        }
+        .side {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <!-- Logo de marque, même tracé que BrandLogo (src/components/ui). -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 160 160"
+        fill="#6366f1"
+        fill-rule="evenodd"
+        aria-hidden="true"
+      >
+        <path
+          d="M84,0 110,0 110,85 85,110 84,110Z
       M42,34 68,34 68,97 66,97 57,87 53,87 44,97 42,97Z
       M0,67 26,67 26,114 1,139 0,139Z
-      M118,68 160,68 160,110 143,110 143,97 142,97 86,154 84,154 78,147 76,147 71,141 69,141 57,129 54,129 24,160 1,160 54,106 56,108 58,108 63,114 65,114 70,120 72,120 77,126 79,126 83,131 85,131 131,85 131,84 118,84Z" />
-  </svg>
-  <b>Finance<i>Hub</i></b>
-  <span class="spacer"></span>
-  <a href="confidentialite.html">Confidentialité</a>
-  <a href="conditions.html">Conditions</a>
-</header>
+      M118,68 160,68 160,110 143,110 143,97 142,97 86,154 84,154 78,147 76,147 71,141 69,141 57,129 54,129 24,160 1,160 54,106 56,108 58,108 63,114 65,114 70,120 72,120 77,126 79,126 83,131 85,131 131,85 131,84 118,84Z"
+        />
+      </svg>
+      <b>Finance<i>Hub</i></b>
+      <span class="spacer"></span>
+      <a href="confidentialite.html">Confidentialité</a>
+      <a href="conditions.html">Conditions</a>
+    </header>
 
-<main class="shell">
+    <main class="shell">
+      <p class="note">
+        Aperçu de l'écran d'accueil de FinanceHub, avec des données de
+        démonstration. L'application fonctionne sur votre appareil : vos
+        comptes, vos opérations et vos budgets ne sont envoyés nulle part.
+      </p>
 
-  <p class="note">
-    Aperçu de l'écran d'accueil de FinanceHub, avec des données de démonstration.
-    L'application fonctionne sur votre appareil : vos comptes, vos opérations et
-    vos budgets ne sont envoyés nulle part.
-  </p>
-
-  <div class="stack">
-
-    <!-- Sélecteur de mois -->
-    <div class="monthbar">
-      <button type="button" aria-label="Mois précédent">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
-      </button>
-      <span>août 2026</span>
-      <button type="button" aria-label="Mois suivant" disabled>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-      </button>
-    </div>
-
-    <!-- Indicateurs -->
-    <div class="tiles">
-      <div class="tile">
-        <div class="row">
-          <span class="lbl">Patrimoine net</span>
-          <span class="badge b-brand">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg>
-          </span>
-        </div>
-        <p class="val tnum">20 418,45 €</p>
-      </div>
-
-      <div class="tile">
-        <div class="row">
-          <span class="lbl">Revenus du mois</span>
-          <span class="badge b-green">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
-          </span>
-        </div>
-        <p class="val tnum">3 604,50 €</p>
-        <p class="delta up tnum">▲ 6,2 % vs mois précédent</p>
-      </div>
-
-      <div class="tile">
-        <div class="row">
-          <span class="lbl">Dépenses du mois</span>
-          <span class="badge b-red">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7 17 17"/><path d="M17 7v10H7"/></svg>
-          </span>
-        </div>
-        <p class="val tnum">1 827,65 €</p>
-        <p class="delta up tnum">▼ 3,8 % vs mois précédent</p>
-      </div>
-
-      <div class="tile">
-        <div class="row">
-          <span class="lbl">Taux d'épargne</span>
-          <span class="badge b-green">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
-          </span>
-        </div>
-        <p class="val tnum">49,3 %</p>
-      </div>
-    </div>
-
-    <!-- Évolution + Répartition -->
-    <div class="grid3">
-      <section class="card span2">
-        <header class="chead">
-          <div class="left">
-            <span class="ico">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
-            </span>
-            <div>
-              <h2>Évolution</h2>
-              <p>Revenus et dépenses des six derniers mois</p>
-            </div>
-          </div>
-        </header>
-
-        <svg class="chart" viewBox="0 0 640 220" role="img" aria-label="Graphique des revenus et dépenses sur six mois">
-          <defs>
-            <linearGradient id="gIncome" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#10b981" stop-opacity=".35"/>
-              <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
-            </linearGradient>
-            <linearGradient id="gExpense" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#f43f5e" stop-opacity=".35"/>
-              <stop offset="100%" stop-color="#f43f5e" stop-opacity="0"/>
-            </linearGradient>
-          </defs>
-
-          <line class="grid-line" x1="40" y1="200" x2="628" y2="200"/>
-          <line class="grid-line" x1="40" y1="155" x2="628" y2="155"/>
-          <line class="grid-line" x1="40" y1="110" x2="628" y2="110"/>
-          <line class="grid-line" x1="40" y1="65"  x2="628" y2="65"/>
-          <line class="grid-line" x1="40" y1="20"  x2="628" y2="20"/>
-
-          <text class="axis" x="34" y="204" text-anchor="end">0</text>
-          <text class="axis" x="34" y="159" text-anchor="end">1 000</text>
-          <text class="axis" x="34" y="114" text-anchor="end">2 000</text>
-          <text class="axis" x="34" y="69"  text-anchor="end">3 000</text>
-          <text class="axis" x="34" y="24"  text-anchor="end">4 000</text>
-
-          <path fill="url(#gIncome)" d="M40,55.6 L156,47.9 L272,52 L388,44.8 L504,47.2 L620,37.8 L620,200 L40,200 Z"/>
-          <path fill="none" stroke="#10b981" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
-                d="M40,55.6 L156,47.9 L272,52 L388,44.8 L504,47.2 L620,37.8"/>
-
-          <path fill="url(#gExpense)" d="M40,110.9 L156,103.7 L272,115.9 L388,98.3 L504,114.5 L620,117.7 L620,200 L40,200 Z"/>
-          <path fill="none" stroke="#f43f5e" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"
-                d="M40,110.9 L156,103.7 L272,115.9 L388,98.3 L504,114.5 L620,117.7"/>
-
-          <text class="axis" x="40"  y="216" text-anchor="middle">mars</text>
-          <text class="axis" x="156" y="216" text-anchor="middle">avr.</text>
-          <text class="axis" x="272" y="216" text-anchor="middle">mai</text>
-          <text class="axis" x="388" y="216" text-anchor="middle">juin</text>
-          <text class="axis" x="504" y="216" text-anchor="middle">juil.</text>
-          <text class="axis" x="620" y="216" text-anchor="middle">août</text>
-        </svg>
-
-        <div class="legend">
-          <span><i class="dot" style="background:#10b981"></i> Revenus</span>
-          <span><i class="dot" style="background:#f43f5e"></i> Dépenses</span>
-        </div>
-      </section>
-
-      <section class="card">
-        <header class="chead">
-          <div class="left">
-            <span class="ico">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/><path d="M16 11h.01"/></svg>
-            </span>
-            <div>
-              <h2>Répartition</h2>
-              <p>août 2026</p>
-            </div>
-          </div>
-        </header>
-
-        <div class="donutwrap">
-          <svg class="chart" viewBox="0 0 160 160" style="max-width:200px" role="img" aria-label="Répartition des dépenses par catégorie">
-            <g transform="rotate(-90 80 80)" fill="none" stroke-width="24">
-              <circle cx="80" cy="80" r="54" stroke="#6366f1" stroke-dasharray="144.8 339.3" stroke-dashoffset="0"/>
-              <circle cx="80" cy="80" r="54" stroke="#f97316" stroke-dasharray="70.6 339.3" stroke-dashoffset="-144.8"/>
-              <circle cx="80" cy="80" r="54" stroke="#ec4899" stroke-dasharray="44.3 339.3" stroke-dashoffset="-215.4"/>
-              <circle cx="80" cy="80" r="54" stroke="#0ea5e9" stroke-dasharray="30.4 339.3" stroke-dashoffset="-259.7"/>
-              <circle cx="80" cy="80" r="54" stroke="#eab308" stroke-dasharray="26.7 339.3" stroke-dashoffset="-290.1"/>
-              <circle cx="80" cy="80" r="54" stroke="#a855f7" stroke-dasharray="17.8 339.3" stroke-dashoffset="-316.8"/>
-              <circle cx="80" cy="80" r="54" stroke="#8b5cf6" stroke-dasharray="4.6 339.3"  stroke-dashoffset="-334.6"/>
-            </g>
-          </svg>
-          <span class="mid">
-            <b class="tnum">1 827,65 €</b>
-            <small>dépensés</small>
-          </span>
+      <div class="stack">
+        <!-- Sélecteur de mois -->
+        <div class="monthbar">
+          <button type="button" aria-label="Mois précédent">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
+          <span>août 2026</span>
+          <button type="button" aria-label="Mois suivant" disabled>
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
         </div>
 
-        <ul class="rows spaced" style="margin-top:12px">
-          <li class="catrow"><span class="l"><i class="dot" style="background:#6366f1"></i><span>Logement</span></span><span class="r tnum">780,00 € <small>43 %</small></span></li>
-          <li class="catrow"><span class="l"><i class="dot" style="background:#f97316"></i><span>Alimentation</span></span><span class="r tnum">380,20 € <small>21 %</small></span></li>
-          <li class="catrow"><span class="l"><i class="dot" style="background:#ec4899"></i><span>Loisirs</span></span><span class="r tnum">238,50 € <small>13 %</small></span></li>
-          <li class="catrow"><span class="l"><i class="dot" style="background:#0ea5e9"></i><span>Transport</span></span><span class="r tnum">164,00 € <small>9 %</small></span></li>
-          <li class="catrow"><span class="l"><i class="dot" style="background:#eab308"></i><span>Factures</span></span><span class="r tnum">143,97 € <small>8 %</small></span></li>
-        </ul>
-      </section>
-    </div>
-
-    <!-- Transactions récentes + Comptes -->
-    <div class="grid3">
-      <section class="card span2">
-        <header class="chead">
-          <div class="left">
-            <span class="ico">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg>
-            </span>
-            <div>
-              <h2>Opérations récentes</h2>
-              <p>Les huit dernières, toutes catégories</p>
-            </div>
-          </div>
-          <span class="ghost">Tout voir</span>
-        </header>
-
-        <ul class="rows divided">
-          <li class="txrow">
-            <span class="avatar" style="background:#f97316">SU</span>
-            <span class="body"><p class="name">Supermarché</p><p class="sub">25 août 2026 · Alimentation · Compte courant</p></span>
-            <span class="amount tnum" style="color:var(--red)">− 86,40 €</span>
-          </li>
-          <li class="txrow">
-            <span class="avatar" style="background:#14b8a6">DI</span>
-            <span class="body"><p class="name">Dividendes ETF</p><p class="sub">24 août 2026 · Investissements · PEA</p></span>
-            <span class="amount tnum" style="color:var(--green)">+ 214,50 €</span>
-          </li>
-          <li class="txrow">
-            <span class="avatar" style="background:#ec4899">RE</span>
-            <span class="body"><p class="name">Restaurant</p><p class="sub">23 août 2026 · Loisirs · Compte courant</p></span>
-            <span class="amount tnum" style="color:var(--red)">− 54,00 €</span>
-          </li>
-          <li class="txrow">
-            <span class="avatar" style="background:#0ea5e9">ST</span>
-            <span class="body"><p class="name">Station essence</p><p class="sub">22 août 2026 · Transport · Compte courant</p></span>
-            <span class="amount tnum" style="color:var(--red)">− 62,30 €</span>
-          </li>
-          <li class="txrow">
-            <span class="avatar" style="background:#0ea5e9">VI</span>
-            <span class="body"><p class="name">Virement épargne</p><p class="sub">21 août 2026 · Virement · Compte courant</p></span>
-            <span class="amount tnum" style="color:var(--sky)">↔ 400,00 €</span>
-          </li>
-          <li class="txrow">
-            <span class="avatar" style="background:#f97316">BO</span>
-            <span class="body"><p class="name">Boulangerie</p><p class="sub">20 août 2026 · Alimentation · Espèces</p></span>
-            <span class="amount tnum" style="color:var(--red)">− 7,80 €</span>
-          </li>
-          <li class="txrow">
-            <span class="avatar" style="background:#8b5cf6">NE</span>
-            <span class="body"><p class="name">Netflix</p><p class="sub">18 août 2026 · Abonnements · Compte courant</p></span>
-            <span class="amount tnum" style="color:var(--red)">− 13,99 €</span>
-          </li>
-          <li class="txrow">
-            <span class="avatar" style="background:#22c55e">EM</span>
-            <span class="body"><p class="name">Employeur SARL</p><p class="sub">1 août 2026 · Salaire · Compte courant</p></span>
-            <span class="amount tnum" style="color:var(--green)">+ 2 750,00 €</span>
-          </li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <header class="chead">
-          <div class="left">
-            <span class="ico">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg>
-            </span>
-            <div><h2>Mes comptes</h2></div>
-          </div>
-          <span class="ghost">Gérer</span>
-        </header>
-
-        <ul class="rows spaced">
-          <li class="txrow" style="padding:0">
-            <span class="swatch" style="background:#6366f122;border:2px solid #6366f1"></span>
-            <span class="body"><p class="name">Compte courant</p><p class="sub">Compte courant</p></span>
-            <span class="amount tnum">3 128,40 €</span>
-          </li>
-          <li class="txrow" style="padding:0">
-            <span class="swatch" style="background:#22c55e22;border:2px solid #22c55e"></span>
-            <span class="body"><p class="name">Livret A</p><p class="sub">Épargne</p></span>
-            <span class="amount tnum">9 400,00 €</span>
-          </li>
-          <li class="txrow" style="padding:0">
-            <span class="swatch" style="background:#f59e0b22;border:2px solid #f59e0b"></span>
-            <span class="body"><p class="name">Espèces</p><p class="sub">Espèces</p></span>
-            <span class="amount tnum">812,35 €</span>
-          </li>
-          <li class="txrow" style="padding:0">
-            <span class="swatch" style="background:#0ea5e922;border:2px solid #0ea5e9"></span>
-            <span class="body"><p class="name">PEA</p><p class="sub">Investissement</p></span>
-            <span class="amount tnum">5 414,50 €</span>
-          </li>
-          <li class="txrow" style="padding:0">
-            <span class="swatch" style="background:#14b8a622;border:2px solid #14b8a6"></span>
-            <span class="body"><p class="name">Compte USD (voyages)</p><p class="sub">Compte courant · USD</p></span>
-            <span class="amount tnum" style="text-align:end">1 800,00 $US
-              <small style="display:block;font-size:11px;font-weight:400;color:var(--faint)">≈ 1 663,20 €</small>
-            </span>
-          </li>
-        </ul>
-
-        <div style="margin-top:16px;border-top:1px solid var(--line-soft);padding-top:12px">
-          <p style="margin:0 0 8px;font-size:12px;font-weight:500;color:var(--muted)">Soldes par devise</p>
-          <ul class="rows spaced" style="font-size:12px">
-            <li class="catrow" style="font-size:12px">
-              <span class="l"><span><b>EUR</b> <span style="color:var(--faint)">4 comptes</span></span></span>
-              <span class="r tnum">18 755,25 €</span>
-            </li>
-            <li class="catrow" style="font-size:12px">
-              <span class="l"><span><b>USD</b> <span style="color:var(--faint)">1 compte</span></span></span>
-              <span class="r tnum" style="text-align:end">1 800,00 $US
-                <small style="display:block;font-size:11px;color:var(--faint)">≈ 1 663,20 € · 8 %</small>
+        <!-- Indicateurs -->
+        <div class="tiles">
+          <div class="tile">
+            <div class="row">
+              <span class="lbl">Patrimoine net</span>
+              <span class="badge b-brand">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"
+                  />
+                  <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
+                </svg>
               </span>
-            </li>
-          </ul>
-        </div>
-      </section>
-    </div>
-
-    <!-- Budgets + Objectifs / À venir -->
-    <div class="grid3">
-      <section class="card span2">
-        <header class="chead">
-          <div class="left">
-            <span class="ico">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"/><path d="M2 9v1c0 1.1.9 2 2 2h1"/><path d="M16 11h.01"/></svg>
-            </span>
-            <div>
-              <h2>Budgets du mois</h2>
-              <p>1 047,65 € dépensés sur 1 220,00 €</p>
             </div>
+            <p class="val tnum">20 418,45 €</p>
           </div>
-          <span class="ghost">Gérer</span>
-        </header>
 
-        <div>
-          <div>
-            <div class="plabel"><span style="font-weight:500">Loisirs</span><span class="amt tnum">238,50 € / 220,00 €</span></div>
-            <div class="track"><i style="width:100%;background:#f43f5e"></i></div>
+          <div class="tile">
+            <div class="row">
+              <span class="lbl">Revenus du mois</span>
+              <span class="badge b-green">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M7 7h10v10" />
+                  <path d="M7 17 17 7" />
+                </svg>
+              </span>
+            </div>
+            <p class="val tnum">3 604,50 €</p>
+            <p class="delta up tnum">▲ 6,2 % vs mois précédent</p>
           </div>
-          <div style="margin-top:16px">
-            <div class="plabel"><span style="font-weight:500">Transport</span><span class="amt tnum">164,00 € / 180,00 €</span></div>
-            <div class="track"><i style="width:91%;background:#f59e0b"></i></div>
+
+          <div class="tile">
+            <div class="row">
+              <span class="lbl">Dépenses du mois</span>
+              <span class="badge b-red">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M7 7 17 17" />
+                  <path d="M17 7v10H7" />
+                </svg>
+              </span>
+            </div>
+            <p class="val tnum">1 827,65 €</p>
+            <p class="delta up tnum">▼ 3,8 % vs mois précédent</p>
           </div>
-          <div style="margin-top:16px">
-            <div class="plabel"><span style="font-weight:500">Factures</span><span class="amt tnum">143,97 € / 160,00 €</span></div>
-            <div class="track"><i style="width:90%;background:#f59e0b"></i></div>
-          </div>
-          <div style="margin-top:16px">
-            <div class="plabel"><span style="font-weight:500">Alimentation</span><span class="amt tnum">380,20 € / 450,00 €</span></div>
-            <div class="track"><i style="width:84.5%;background:#f97316"></i></div>
-          </div>
-          <div style="margin-top:16px">
-            <div class="plabel"><span style="font-weight:500">Shopping</span><span class="amt tnum">96,00 € / 150,00 €</span></div>
-            <div class="track"><i style="width:64%;background:#a855f7"></i></div>
-          </div>
-          <div style="margin-top:16px">
-            <div class="plabel"><span style="font-weight:500">Abonnements</span><span class="amt tnum">24,98 € / 60,00 €</span></div>
-            <div class="track"><i style="width:41.6%;background:#8b5cf6"></i></div>
+
+          <div class="tile">
+            <div class="row">
+              <span class="lbl">Taux d'épargne</span>
+              <span class="badge b-green">
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M16 7h6v6" />
+                  <path d="m22 7-8.5 8.5-5-5L2 17" />
+                </svg>
+              </span>
+            </div>
+            <p class="val tnum">49,3 %</p>
           </div>
         </div>
-      </section>
 
-      <div class="side">
+        <!-- Évolution + Répartition -->
+        <div class="grid3">
+          <section class="card span2">
+            <header class="chead">
+              <div class="left">
+                <span class="ico">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 7h6v6" />
+                    <path d="m22 7-8.5 8.5-5-5L2 17" />
+                  </svg>
+                </span>
+                <div>
+                  <h2>Évolution</h2>
+                  <p>Revenus et dépenses des six derniers mois</p>
+                </div>
+              </div>
+            </header>
+
+            <svg
+              class="chart"
+              viewBox="0 0 640 220"
+              role="img"
+              aria-label="Graphique des revenus et dépenses sur six mois"
+            >
+              <defs>
+                <linearGradient id="gIncome" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#10b981" stop-opacity=".35" />
+                  <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
+                </linearGradient>
+                <linearGradient id="gExpense" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#f43f5e" stop-opacity=".35" />
+                  <stop offset="100%" stop-color="#f43f5e" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+
+              <line class="grid-line" x1="40" y1="200" x2="628" y2="200" />
+              <line class="grid-line" x1="40" y1="155" x2="628" y2="155" />
+              <line class="grid-line" x1="40" y1="110" x2="628" y2="110" />
+              <line class="grid-line" x1="40" y1="65" x2="628" y2="65" />
+              <line class="grid-line" x1="40" y1="20" x2="628" y2="20" />
+
+              <text class="axis" x="34" y="204" text-anchor="end">0</text>
+              <text class="axis" x="34" y="159" text-anchor="end">1 000</text>
+              <text class="axis" x="34" y="114" text-anchor="end">2 000</text>
+              <text class="axis" x="34" y="69" text-anchor="end">3 000</text>
+              <text class="axis" x="34" y="24" text-anchor="end">4 000</text>
+
+              <path
+                fill="url(#gIncome)"
+                d="M40,55.6 L156,47.9 L272,52 L388,44.8 L504,47.2 L620,37.8 L620,200 L40,200 Z"
+              />
+              <path
+                fill="none"
+                stroke="#10b981"
+                stroke-width="2"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                d="M40,55.6 L156,47.9 L272,52 L388,44.8 L504,47.2 L620,37.8"
+              />
+
+              <path
+                fill="url(#gExpense)"
+                d="M40,110.9 L156,103.7 L272,115.9 L388,98.3 L504,114.5 L620,117.7 L620,200 L40,200 Z"
+              />
+              <path
+                fill="none"
+                stroke="#f43f5e"
+                stroke-width="2"
+                stroke-linejoin="round"
+                stroke-linecap="round"
+                d="M40,110.9 L156,103.7 L272,115.9 L388,98.3 L504,114.5 L620,117.7"
+              />
+
+              <text class="axis" x="40" y="216" text-anchor="middle">mars</text>
+              <text class="axis" x="156" y="216" text-anchor="middle">
+                avr.
+              </text>
+              <text class="axis" x="272" y="216" text-anchor="middle">mai</text>
+              <text class="axis" x="388" y="216" text-anchor="middle">
+                juin
+              </text>
+              <text class="axis" x="504" y="216" text-anchor="middle">
+                juil.
+              </text>
+              <text class="axis" x="620" y="216" text-anchor="middle">
+                août
+              </text>
+            </svg>
+
+            <div class="legend">
+              <span
+                ><i class="dot" style="background: #10b981"></i> Revenus</span
+              >
+              <span
+                ><i class="dot" style="background: #f43f5e"></i> Dépenses</span
+              >
+            </div>
+          </section>
+
+          <section class="card">
+            <header class="chead">
+              <div class="left">
+                <span class="ico">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"
+                    />
+                    <path d="M2 9v1c0 1.1.9 2 2 2h1" />
+                    <path d="M16 11h.01" />
+                  </svg>
+                </span>
+                <div>
+                  <h2>Répartition</h2>
+                  <p>août 2026</p>
+                </div>
+              </div>
+            </header>
+
+            <div class="donutwrap">
+              <svg
+                class="chart"
+                viewBox="0 0 160 160"
+                style="max-width: 200px"
+                role="img"
+                aria-label="Répartition des dépenses par catégorie"
+              >
+                <g transform="rotate(-90 80 80)" fill="none" stroke-width="24">
+                  <circle
+                    cx="80"
+                    cy="80"
+                    r="54"
+                    stroke="#6366f1"
+                    stroke-dasharray="144.8 339.3"
+                    stroke-dashoffset="0"
+                  />
+                  <circle
+                    cx="80"
+                    cy="80"
+                    r="54"
+                    stroke="#f97316"
+                    stroke-dasharray="70.6 339.3"
+                    stroke-dashoffset="-144.8"
+                  />
+                  <circle
+                    cx="80"
+                    cy="80"
+                    r="54"
+                    stroke="#ec4899"
+                    stroke-dasharray="44.3 339.3"
+                    stroke-dashoffset="-215.4"
+                  />
+                  <circle
+                    cx="80"
+                    cy="80"
+                    r="54"
+                    stroke="#0ea5e9"
+                    stroke-dasharray="30.4 339.3"
+                    stroke-dashoffset="-259.7"
+                  />
+                  <circle
+                    cx="80"
+                    cy="80"
+                    r="54"
+                    stroke="#eab308"
+                    stroke-dasharray="26.7 339.3"
+                    stroke-dashoffset="-290.1"
+                  />
+                  <circle
+                    cx="80"
+                    cy="80"
+                    r="54"
+                    stroke="#a855f7"
+                    stroke-dasharray="17.8 339.3"
+                    stroke-dashoffset="-316.8"
+                  />
+                  <circle
+                    cx="80"
+                    cy="80"
+                    r="54"
+                    stroke="#8b5cf6"
+                    stroke-dasharray="4.6 339.3"
+                    stroke-dashoffset="-334.6"
+                  />
+                </g>
+              </svg>
+              <span class="mid">
+                <b class="tnum">1 827,65 €</b>
+                <small>dépensés</small>
+              </span>
+            </div>
+
+            <ul class="rows spaced" style="margin-top: 12px">
+              <li class="catrow">
+                <span class="l"
+                  ><i class="dot" style="background: #6366f1"></i
+                  ><span>Logement</span></span
+                ><span class="r tnum">780,00 € <small>43 %</small></span>
+              </li>
+              <li class="catrow">
+                <span class="l"
+                  ><i class="dot" style="background: #f97316"></i
+                  ><span>Alimentation</span></span
+                ><span class="r tnum">380,20 € <small>21 %</small></span>
+              </li>
+              <li class="catrow">
+                <span class="l"
+                  ><i class="dot" style="background: #ec4899"></i
+                  ><span>Loisirs</span></span
+                ><span class="r tnum">238,50 € <small>13 %</small></span>
+              </li>
+              <li class="catrow">
+                <span class="l"
+                  ><i class="dot" style="background: #0ea5e9"></i
+                  ><span>Transport</span></span
+                ><span class="r tnum">164,00 € <small>9 %</small></span>
+              </li>
+              <li class="catrow">
+                <span class="l"
+                  ><i class="dot" style="background: #eab308"></i
+                  ><span>Factures</span></span
+                ><span class="r tnum">143,97 € <small>8 %</small></span>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+        <!-- Transactions récentes + Comptes -->
+        <div class="grid3">
+          <section class="card span2">
+            <header class="chead">
+              <div class="left">
+                <span class="ico">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"
+                    />
+                    <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
+                  </svg>
+                </span>
+                <div>
+                  <h2>Opérations récentes</h2>
+                  <p>Les huit dernières, toutes catégories</p>
+                </div>
+              </div>
+              <span class="ghost">Tout voir</span>
+            </header>
+
+            <ul class="rows divided">
+              <li class="txrow">
+                <span class="avatar" style="background: #f97316">SU</span>
+                <span class="body"
+                  ><p class="name">Supermarché</p>
+                  <p class="sub">
+                    25 août 2026 · Alimentation · Compte courant
+                  </p></span
+                >
+                <span class="amount tnum" style="color: var(--red)"
+                  >− 86,40 €</span
+                >
+              </li>
+              <li class="txrow">
+                <span class="avatar" style="background: #14b8a6">DI</span>
+                <span class="body"
+                  ><p class="name">Dividendes ETF</p>
+                  <p class="sub">24 août 2026 · Investissements · PEA</p></span
+                >
+                <span class="amount tnum" style="color: var(--green)"
+                  >+ 214,50 €</span
+                >
+              </li>
+              <li class="txrow">
+                <span class="avatar" style="background: #ec4899">RE</span>
+                <span class="body"
+                  ><p class="name">Restaurant</p>
+                  <p class="sub">
+                    23 août 2026 · Loisirs · Compte courant
+                  </p></span
+                >
+                <span class="amount tnum" style="color: var(--red)"
+                  >− 54,00 €</span
+                >
+              </li>
+              <li class="txrow">
+                <span class="avatar" style="background: #0ea5e9">ST</span>
+                <span class="body"
+                  ><p class="name">Station essence</p>
+                  <p class="sub">
+                    22 août 2026 · Transport · Compte courant
+                  </p></span
+                >
+                <span class="amount tnum" style="color: var(--red)"
+                  >− 62,30 €</span
+                >
+              </li>
+              <li class="txrow">
+                <span class="avatar" style="background: #0ea5e9">VI</span>
+                <span class="body"
+                  ><p class="name">Virement épargne</p>
+                  <p class="sub">
+                    21 août 2026 · Virement · Compte courant
+                  </p></span
+                >
+                <span class="amount tnum" style="color: var(--sky)"
+                  >↔ 400,00 €</span
+                >
+              </li>
+              <li class="txrow">
+                <span class="avatar" style="background: #f97316">BO</span>
+                <span class="body"
+                  ><p class="name">Boulangerie</p>
+                  <p class="sub">20 août 2026 · Alimentation · Espèces</p></span
+                >
+                <span class="amount tnum" style="color: var(--red)"
+                  >− 7,80 €</span
+                >
+              </li>
+              <li class="txrow">
+                <span class="avatar" style="background: #8b5cf6">NE</span>
+                <span class="body"
+                  ><p class="name">Netflix</p>
+                  <p class="sub">
+                    18 août 2026 · Abonnements · Compte courant
+                  </p></span
+                >
+                <span class="amount tnum" style="color: var(--red)"
+                  >− 13,99 €</span
+                >
+              </li>
+              <li class="txrow">
+                <span class="avatar" style="background: #22c55e">EM</span>
+                <span class="body"
+                  ><p class="name">Employeur SARL</p>
+                  <p class="sub">
+                    1 août 2026 · Salaire · Compte courant
+                  </p></span
+                >
+                <span class="amount tnum" style="color: var(--green)"
+                  >+ 2 750,00 €</span
+                >
+              </li>
+            </ul>
+          </section>
+
+          <section class="card">
+            <header class="chead">
+              <div class="left">
+                <span class="ico">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"
+                    />
+                    <path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />
+                  </svg>
+                </span>
+                <div><h2>Mes comptes</h2></div>
+              </div>
+              <span class="ghost">Gérer</span>
+            </header>
+
+            <ul class="rows spaced">
+              <li class="txrow" style="padding: 0">
+                <span
+                  class="swatch"
+                  style="background: #6366f122; border: 2px solid #6366f1"
+                ></span>
+                <span class="body"
+                  ><p class="name">Compte courant</p>
+                  <p class="sub">Compte courant</p></span
+                >
+                <span class="amount tnum">3 128,40 €</span>
+              </li>
+              <li class="txrow" style="padding: 0">
+                <span
+                  class="swatch"
+                  style="background: #22c55e22; border: 2px solid #22c55e"
+                ></span>
+                <span class="body"
+                  ><p class="name">Livret A</p>
+                  <p class="sub">Épargne</p></span
+                >
+                <span class="amount tnum">9 400,00 €</span>
+              </li>
+              <li class="txrow" style="padding: 0">
+                <span
+                  class="swatch"
+                  style="background: #f59e0b22; border: 2px solid #f59e0b"
+                ></span>
+                <span class="body"
+                  ><p class="name">Espèces</p>
+                  <p class="sub">Espèces</p></span
+                >
+                <span class="amount tnum">812,35 €</span>
+              </li>
+              <li class="txrow" style="padding: 0">
+                <span
+                  class="swatch"
+                  style="background: #0ea5e922; border: 2px solid #0ea5e9"
+                ></span>
+                <span class="body"
+                  ><p class="name">PEA</p>
+                  <p class="sub">Investissement</p></span
+                >
+                <span class="amount tnum">5 414,50 €</span>
+              </li>
+              <li class="txrow" style="padding: 0">
+                <span
+                  class="swatch"
+                  style="background: #14b8a622; border: 2px solid #14b8a6"
+                ></span>
+                <span class="body"
+                  ><p class="name">Compte USD (voyages)</p>
+                  <p class="sub">Compte courant · USD</p></span
+                >
+                <span class="amount tnum" style="text-align: end"
+                  >1 800,00 $US
+                  <small
+                    style="
+                      display: block;
+                      font-size: 11px;
+                      font-weight: 400;
+                      color: var(--faint);
+                    "
+                    >≈ 1 663,20 €</small
+                  >
+                </span>
+              </li>
+            </ul>
+
+            <div
+              style="
+                margin-top: 16px;
+                border-top: 1px solid var(--line-soft);
+                padding-top: 12px;
+              "
+            >
+              <p
+                style="
+                  margin: 0 0 8px;
+                  font-size: 12px;
+                  font-weight: 500;
+                  color: var(--muted);
+                "
+              >
+                Soldes par devise
+              </p>
+              <ul class="rows spaced" style="font-size: 12px">
+                <li class="catrow" style="font-size: 12px">
+                  <span class="l"
+                    ><span
+                      ><b>EUR</b>
+                      <span style="color: var(--faint)">4 comptes</span></span
+                    ></span
+                  >
+                  <span class="r tnum">18 755,25 €</span>
+                </li>
+                <li class="catrow" style="font-size: 12px">
+                  <span class="l"
+                    ><span
+                      ><b>USD</b>
+                      <span style="color: var(--faint)">1 compte</span></span
+                    ></span
+                  >
+                  <span class="r tnum" style="text-align: end"
+                    >1 800,00 $US
+                    <small
+                      style="
+                        display: block;
+                        font-size: 11px;
+                        color: var(--faint);
+                      "
+                      >≈ 1 663,20 € · 8 %</small
+                    >
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+        <!-- Budgets + Objectifs / À venir -->
+        <div class="grid3">
+          <section class="card span2">
+            <header class="chead">
+              <div class="left">
+                <span class="ico">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2V5z"
+                    />
+                    <path d="M2 9v1c0 1.1.9 2 2 2h1" />
+                    <path d="M16 11h.01" />
+                  </svg>
+                </span>
+                <div>
+                  <h2>Budgets du mois</h2>
+                  <p>1 047,65 € dépensés sur 1 220,00 €</p>
+                </div>
+              </div>
+              <span class="ghost">Gérer</span>
+            </header>
+
+            <div>
+              <div>
+                <div class="plabel">
+                  <span style="font-weight: 500">Loisirs</span
+                  ><span class="amt tnum">238,50 € / 220,00 €</span>
+                </div>
+                <div class="track">
+                  <i style="width: 100%; background: #f43f5e"></i>
+                </div>
+              </div>
+              <div style="margin-top: 16px">
+                <div class="plabel">
+                  <span style="font-weight: 500">Transport</span
+                  ><span class="amt tnum">164,00 € / 180,00 €</span>
+                </div>
+                <div class="track">
+                  <i style="width: 91%; background: #f59e0b"></i>
+                </div>
+              </div>
+              <div style="margin-top: 16px">
+                <div class="plabel">
+                  <span style="font-weight: 500">Factures</span
+                  ><span class="amt tnum">143,97 € / 160,00 €</span>
+                </div>
+                <div class="track">
+                  <i style="width: 90%; background: #f59e0b"></i>
+                </div>
+              </div>
+              <div style="margin-top: 16px">
+                <div class="plabel">
+                  <span style="font-weight: 500">Alimentation</span
+                  ><span class="amt tnum">380,20 € / 450,00 €</span>
+                </div>
+                <div class="track">
+                  <i style="width: 84.5%; background: #f97316"></i>
+                </div>
+              </div>
+              <div style="margin-top: 16px">
+                <div class="plabel">
+                  <span style="font-weight: 500">Shopping</span
+                  ><span class="amt tnum">96,00 € / 150,00 €</span>
+                </div>
+                <div class="track">
+                  <i style="width: 64%; background: #a855f7"></i>
+                </div>
+              </div>
+              <div style="margin-top: 16px">
+                <div class="plabel">
+                  <span style="font-weight: 500">Abonnements</span
+                  ><span class="amt tnum">24,98 € / 60,00 €</span>
+                </div>
+                <div class="track">
+                  <i style="width: 41.6%; background: #8b5cf6"></i>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="side">
+            <section class="card">
+              <header class="chead">
+                <div class="left">
+                  <span class="ico">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <circle cx="12" cy="12" r="6" />
+                      <circle cx="12" cy="12" r="2" />
+                    </svg>
+                  </span>
+                  <div><h2>Objectifs</h2></div>
+                </div>
+                <span class="ghost">Voir</span>
+              </header>
+
+              <div>
+                <div class="plabel">
+                  <span style="font-weight: 500">Fonds d'urgence</span
+                  ><span class="amt tnum" style="font-size: 12px">64 %</span>
+                </div>
+                <div class="track">
+                  <i style="width: 64%; background: #22c55e"></i>
+                </div>
+                <p
+                  class="tnum"
+                  style="margin: 4px 0 0; font-size: 12px; color: var(--muted)"
+                >
+                  6 400,00 € / 10 000,00 €
+                </p>
+              </div>
+              <div style="margin-top: 16px">
+                <div class="plabel">
+                  <span style="font-weight: 500">Voyage Japon</span
+                  ><span class="amt tnum" style="font-size: 12px">32 %</span>
+                </div>
+                <div class="track">
+                  <i style="width: 32%; background: #ec4899"></i>
+                </div>
+                <p
+                  class="tnum"
+                  style="margin: 4px 0 0; font-size: 12px; color: var(--muted)"
+                >
+                  1 350,00 € / 4 200,00 €
+                </p>
+              </div>
+              <div style="margin-top: 16px">
+                <div class="plabel">
+                  <span style="font-weight: 500">Nouvel ordinateur</span
+                  ><span class="amt tnum" style="font-size: 12px">50 %</span>
+                </div>
+                <div class="track">
+                  <i style="width: 50%; background: #6366f1"></i>
+                </div>
+                <p
+                  class="tnum"
+                  style="margin: 4px 0 0; font-size: 12px; color: var(--muted)"
+                >
+                  900,00 € / 1 800,00 €
+                </p>
+              </div>
+            </section>
+
+            <section class="card" style="margin-top: 20px">
+              <header class="chead">
+                <div class="left">
+                  <span class="ico">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path d="m17 2 4 4-4 4" />
+                      <path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+                      <path d="m7 22-4-4 4-4" />
+                      <path d="M21 13v1a4 4 0 0 1-4 4H3" />
+                    </svg>
+                  </span>
+                  <div><h2>À venir</h2></div>
+                </div>
+                <span class="ghost">Voir</span>
+              </header>
+
+              <ul class="rows spaced">
+                <li class="catrow">
+                  <span class="l"
+                    ><span>
+                      <span style="display: block; font-weight: 500"
+                        >Loyer</span
+                      >
+                      <span style="font-size: 12px; color: var(--amber)"
+                        >En retard · 23 août 2026</span
+                      >
+                    </span></span
+                  >
+                  <span class="r tnum" style="color: var(--red)"
+                    >− 780,00 €</span
+                  >
+                </li>
+                <li class="catrow">
+                  <span class="l"
+                    ><span>
+                      <span style="display: block; font-weight: 500"
+                        >Salaire</span
+                      >
+                      <span style="font-size: 12px; color: var(--muted)"
+                        >31 août 2026</span
+                      >
+                    </span></span
+                  >
+                  <span class="r tnum" style="color: var(--green)"
+                    >+ 2 750,00 €</span
+                  >
+                </li>
+                <li class="catrow">
+                  <span class="l"
+                    ><span>
+                      <span style="display: block; font-weight: 500"
+                        >Abonnement Netflix</span
+                      >
+                      <span style="font-size: 12px; color: var(--muted)"
+                        >3 septembre 2026</span
+                      >
+                    </span></span
+                  >
+                  <span class="r tnum" style="color: var(--red)"
+                    >− 13,99 €</span
+                  >
+                </li>
+              </ul>
+            </section>
+          </div>
+        </div>
+
+        <!-- Comparatif mensuel -->
         <section class="card">
           <header class="chead">
             <div class="left">
               <span class="ico">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M16 7h6v6" />
+                  <path d="m22 7-8.5 8.5-5-5L2 17" />
+                </svg>
               </span>
-              <div><h2>Objectifs</h2></div>
+              <div>
+                <h2>Comparatif mensuel</h2>
+                <p>Revenus et dépenses, mois par mois</p>
+              </div>
             </div>
-            <span class="ghost">Voir</span>
           </header>
 
-          <div>
-            <div class="plabel"><span style="font-weight:500">Fonds d'urgence</span><span class="amt tnum" style="font-size:12px">64 %</span></div>
-            <div class="track"><i style="width:64%;background:#22c55e"></i></div>
-            <p class="tnum" style="margin:4px 0 0;font-size:12px;color:var(--muted)">6 400,00 € / 10 000,00 €</p>
-          </div>
-          <div style="margin-top:16px">
-            <div class="plabel"><span style="font-weight:500">Voyage Japon</span><span class="amt tnum" style="font-size:12px">32 %</span></div>
-            <div class="track"><i style="width:32%;background:#ec4899"></i></div>
-            <p class="tnum" style="margin:4px 0 0;font-size:12px;color:var(--muted)">1 350,00 € / 4 200,00 €</p>
-          </div>
-          <div style="margin-top:16px">
-            <div class="plabel"><span style="font-weight:500">Nouvel ordinateur</span><span class="amt tnum" style="font-size:12px">50 %</span></div>
-            <div class="track"><i style="width:50%;background:#6366f1"></i></div>
-            <p class="tnum" style="margin:4px 0 0;font-size:12px;color:var(--muted)">900,00 € / 1 800,00 €</p>
+          <svg
+            class="chart"
+            viewBox="0 0 640 200"
+            role="img"
+            aria-label="Comparatif mensuel des revenus et des dépenses"
+          >
+            <line class="grid-line" x1="40" y1="170" x2="628" y2="170" />
+            <line class="grid-line" x1="40" y1="132" x2="628" y2="132" />
+            <line class="grid-line" x1="40" y1="95" x2="628" y2="95" />
+            <line class="grid-line" x1="40" y1="57" x2="628" y2="57" />
+            <line class="grid-line" x1="40" y1="20" x2="628" y2="20" />
+
+            <text class="axis" x="34" y="174" text-anchor="end">0</text>
+            <text class="axis" x="34" y="136" text-anchor="end">1 000</text>
+            <text class="axis" x="34" y="99" text-anchor="end">2 000</text>
+            <text class="axis" x="34" y="61" text-anchor="end">3 000</text>
+            <text class="axis" x="34" y="24" text-anchor="end">4 000</text>
+
+            <g fill="#10b981">
+              <rect x="73" y="49.6" width="22" height="120.4" rx="6" />
+              <rect x="168" y="43.3" width="22" height="126.7" rx="6" />
+              <rect x="263" y="46.6" width="22" height="123.4" rx="6" />
+              <rect x="358" y="40.6" width="22" height="129.4" rx="6" />
+              <rect x="453" y="42.7" width="22" height="127.3" rx="6" />
+              <rect x="548" y="34.8" width="22" height="135.2" rx="6" />
+            </g>
+            <g fill="#f43f5e">
+              <rect x="99" y="95.8" width="22" height="74.2" rx="6" />
+              <rect x="194" y="89.8" width="22" height="80.2" rx="6" />
+              <rect x="289" y="99.9" width="22" height="70.1" rx="6" />
+              <rect x="384" y="85.3" width="22" height="84.7" rx="6" />
+              <rect x="479" y="98.8" width="22" height="71.2" rx="6" />
+              <rect x="574" y="101.5" width="22" height="68.5" rx="6" />
+            </g>
+
+            <text class="axis" x="97" y="190" text-anchor="middle">mars</text>
+            <text class="axis" x="192" y="190" text-anchor="middle">avr.</text>
+            <text class="axis" x="287" y="190" text-anchor="middle">mai</text>
+            <text class="axis" x="382" y="190" text-anchor="middle">juin</text>
+            <text class="axis" x="477" y="190" text-anchor="middle">juil.</text>
+            <text class="axis" x="572" y="190" text-anchor="middle">août</text>
+          </svg>
+
+          <div class="legend">
+            <span><i class="dot" style="background: #10b981"></i> Revenus</span>
+            <span
+              ><i class="dot" style="background: #f43f5e"></i> Dépenses</span
+            >
           </div>
         </section>
-
-        <section class="card" style="margin-top:20px">
-          <header class="chead">
-            <div class="left">
-              <span class="ico">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
-              </span>
-              <div><h2>À venir</h2></div>
-            </div>
-            <span class="ghost">Voir</span>
-          </header>
-
-          <ul class="rows spaced">
-            <li class="catrow">
-              <span class="l"><span>
-                <span style="display:block;font-weight:500">Loyer</span>
-                <span style="font-size:12px;color:var(--amber)">En retard · 23 août 2026</span>
-              </span></span>
-              <span class="r tnum" style="color:var(--red)">− 780,00 €</span>
-            </li>
-            <li class="catrow">
-              <span class="l"><span>
-                <span style="display:block;font-weight:500">Salaire</span>
-                <span style="font-size:12px;color:var(--muted)">31 août 2026</span>
-              </span></span>
-              <span class="r tnum" style="color:var(--green)">+ 2 750,00 €</span>
-            </li>
-            <li class="catrow">
-              <span class="l"><span>
-                <span style="display:block;font-weight:500">Abonnement Netflix</span>
-                <span style="font-size:12px;color:var(--muted)">3 septembre 2026</span>
-              </span></span>
-              <span class="r tnum" style="color:var(--red)">− 13,99 €</span>
-            </li>
-          </ul>
-        </section>
       </div>
-    </div>
+    </main>
 
-    <!-- Comparatif mensuel -->
-    <section class="card">
-      <header class="chead">
-        <div class="left">
-          <span class="ico">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
-          </span>
-          <div>
-            <h2>Comparatif mensuel</h2>
-            <p>Revenus et dépenses, mois par mois</p>
-          </div>
-        </div>
-      </header>
-
-      <svg class="chart" viewBox="0 0 640 200" role="img" aria-label="Comparatif mensuel des revenus et des dépenses">
-        <line class="grid-line" x1="40" y1="170" x2="628" y2="170"/>
-        <line class="grid-line" x1="40" y1="132" x2="628" y2="132"/>
-        <line class="grid-line" x1="40" y1="95"  x2="628" y2="95"/>
-        <line class="grid-line" x1="40" y1="57"  x2="628" y2="57"/>
-        <line class="grid-line" x1="40" y1="20"  x2="628" y2="20"/>
-
-        <text class="axis" x="34" y="174" text-anchor="end">0</text>
-        <text class="axis" x="34" y="136" text-anchor="end">1 000</text>
-        <text class="axis" x="34" y="99"  text-anchor="end">2 000</text>
-        <text class="axis" x="34" y="61"  text-anchor="end">3 000</text>
-        <text class="axis" x="34" y="24"  text-anchor="end">4 000</text>
-
-        <g fill="#10b981">
-          <rect x="73"  y="49.6" width="22" height="120.4" rx="6"/>
-          <rect x="168" y="43.3" width="22" height="126.7" rx="6"/>
-          <rect x="263" y="46.6" width="22" height="123.4" rx="6"/>
-          <rect x="358" y="40.6" width="22" height="129.4" rx="6"/>
-          <rect x="453" y="42.7" width="22" height="127.3" rx="6"/>
-          <rect x="548" y="34.8" width="22" height="135.2" rx="6"/>
-        </g>
-        <g fill="#f43f5e">
-          <rect x="99"  y="95.8"  width="22" height="74.2" rx="6"/>
-          <rect x="194" y="89.8"  width="22" height="80.2" rx="6"/>
-          <rect x="289" y="99.9"  width="22" height="70.1" rx="6"/>
-          <rect x="384" y="85.3"  width="22" height="84.7" rx="6"/>
-          <rect x="479" y="98.8"  width="22" height="71.2" rx="6"/>
-          <rect x="574" y="101.5" width="22" height="68.5" rx="6"/>
-        </g>
-
-        <text class="axis" x="97"  y="190" text-anchor="middle">mars</text>
-        <text class="axis" x="192" y="190" text-anchor="middle">avr.</text>
-        <text class="axis" x="287" y="190" text-anchor="middle">mai</text>
-        <text class="axis" x="382" y="190" text-anchor="middle">juin</text>
-        <text class="axis" x="477" y="190" text-anchor="middle">juil.</text>
-        <text class="axis" x="572" y="190" text-anchor="middle">août</text>
-      </svg>
-
-      <div class="legend">
-        <span><i class="dot" style="background:#10b981"></i> Revenus</span>
-        <span><i class="dot" style="background:#f43f5e"></i> Dépenses</span>
-      </div>
-    </section>
-
-  </div>
-</main>
-
-<footer>
-  <p>FinanceHub — <code>com.egolahdev.financehub</code></p>
-  <p><a href="confidentialite.html">Politique de confidentialité</a> · <a href="conditions.html">Conditions d'utilisation</a></p>
-</footer>
-
-</body>
+    <footer>
+      <p>FinanceHub — <code>com.egolahdev.financehub</code></p>
+      <p>
+        <a href="confidentialite.html">Politique de confidentialité</a> ·
+        <a href="conditions.html">Conditions d'utilisation</a>
+      </p>
+    </footer>
+  </body>
 </html>
